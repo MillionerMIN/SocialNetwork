@@ -1,0 +1,9 @@
+
+.myGroups {
+
+    display: grid;
+    grid-template-columns: 290px;
+    grid-template-rows: 55px auto ;
+    height: 400px;
+    background-color: #FFFFFF;
+}

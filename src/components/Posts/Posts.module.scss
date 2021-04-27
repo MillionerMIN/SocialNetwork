@@ -1,0 +1,15 @@
+.post {
+  display: grid;
+  grid-template-columns: 850px 290px;
+  justify-content: space-between;
+  margin-top: 40px;
+  min-height: 10em;
+  font-size: 2em;
+  text-align: center;
+  background-color: #e9f0f8;
+  .newPost {
+    display: grid;
+    grid-template-rows: 135px 80px auto;
+    background: #ffffff;
+  }
+}

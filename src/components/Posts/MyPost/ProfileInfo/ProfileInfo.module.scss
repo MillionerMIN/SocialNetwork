@@ -1,0 +1,19 @@
+.profileInfo {
+    padding: 15px 30px;
+    display: flex;
+    justify-content: start;
+
+    img {
+        max-width: 52px;
+        max-height: 52px;
+        border-radius: 50%;
+    }
+
+    .userName {
+        padding-left: 15px;
+        margin-top: 10px;
+        font-size: 14px;
+        font-weight: bold;
+        color: #181818;
+    }
+}

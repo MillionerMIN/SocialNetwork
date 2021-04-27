@@ -1,0 +1,34 @@
+.filter {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80px;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #181818;
+    background: #E9F0F8;
+
+    &:before {
+        position: absolute;
+        content: '';
+        width: 332px;
+        height: 2px;
+        left: 0;
+        background: #E7E7E7;
+    }
+
+    &:after {
+        position: absolute;
+        content: '';
+        width: 332px;
+        height: 2px;
+        right: 0;
+        background: #E7E7E7;
+    }
+
+    span {
+        color: #0275B1;
+    }
+}
