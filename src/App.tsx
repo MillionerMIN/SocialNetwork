@@ -6,10 +6,10 @@ import { StoreType } from './redux/state';
 import Navigation from './components/Navigation/Navigation';
 import Posts from './components/Posts/Posts';
 import Chats from './components/Chats/Chats';
-import News from './components/News/News';
-import Music from './components/Music/Music';
-import Setting from './components/Setting/Setting';
-import Other from './components/Other/Other';
+// import News from './components/News/News';
+// import Music from './components/Music/Music';
+// import Setting from './components/Setting/Setting';
+// import Other from './components/Other/Other';
 
 
 
@@ -29,10 +29,10 @@ const App: React.FC<AppPropsType> = (props) => {
                 dispatch={props.store.dispatch.bind(props.store)} />} />
             <Route path={'/chats'} render={() => <Chats chatsPage={state.chatsPage}
             dispatch={props.store.dispatch.bind(props.store)} />} />
-            <Route path={'/news'} render={() => <News />} />
+            {/* <Route path={'/news'} render={() => <News />} />
             <Route path={'/music'} render={() => <Music />} />
             <Route path={'/setting'} render={() => <Setting />} />
-            <Route path={'/other'} render={() => <Other />} />
+            <Route path={'/other'} render={() => <Other />} /> */}
 
         </div>
     </BrowserRouter>

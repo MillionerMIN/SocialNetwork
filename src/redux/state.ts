@@ -1,8 +1,8 @@
+import chatsReducer, { sendMessageAC, updateNewMessageAC } from "./chats-reducer"
+import profileReducer, { addPostAC, updateNewPostTextAC } from "./profile-reducer"
 
-const ADD_POST = 'ADD-POST';
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
-const UPDATE_NEW_MESSAGE_BODY = 'UPDATE_NEW_MESSAGE_BODY';
-const SEND_MESSAGE = 'SEND_MESSAGE';
+
+
 
 export type PostType = {
     id: number
@@ -11,11 +11,6 @@ export type PostType = {
     like: number
 }
 type ChatMessageType = {
-    id: number
-    message: string
-}
-
-type NewMessageBodyType = {
     id: number
     message: string
 }
@@ -54,19 +49,7 @@ export type StoreType = {
 
 }
 
-// type AddPostActionType = ReturnType<typeof addPostAC>
-// type UpdateNewPostTextActionType = ReturnType<typeof updateNewPostTextAC>
-
 export type ActionsTypes = ReturnType<typeof addPostAC> | ReturnType<typeof updateNewPostTextAC> | ReturnType<typeof sendMessageAC> | ReturnType<typeof updateNewMessageAC>
-
-export const addPostAC = (postText: string) => ({ type: ADD_POST, newPostText: postText } as const)
-
-export const updateNewPostTextAC = (newText: string)=> ({ type: UPDATE_NEW_POST_TEXT, newText: newText } as const)
-
-export const sendMessageAC = () => ({ type: SEND_MESSAGE } as const)
-
-export const updateNewMessageAC = (body: string) => ({ type: UPDATE_NEW_MESSAGE_BODY, message: body} as const)
-
 
 export const store: StoreType = {
     _state: {
@@ -110,29 +93,10 @@ export const store: StoreType = {
         this._callSubscriber = observer
     },
 
-    dispatch(action: ActionsTypes) {
-        if (action.type === ADD_POST) {
-            let newPost: PostType = {
-                id: new Date().getTime(),
-                messages: action.newPostText,
-                name: 'Kesha',
-                like: 0
-            };
-            this._state.postsPage.posts.push(newPost);
-            this._state.postsPage.newPostText = '';
-            this._callSubscriber();
-        } else if (action.type === UPDATE_NEW_POST_TEXT) {
-            this._state.postsPage.newPostText = action.newText;
-            this._callSubscriber()
-        } else if (action.type === UPDATE_NEW_MESSAGE_BODY) {
-            this._state.chatsPage.newMessageBody = action.message
-            this._callSubscriber()
-        } else if (action.type === SEND_MESSAGE) {
-            let body: NewMessageBodyType = this._state.chatsPage.newMessageBody
-            this._state.chatsPage.newMessageBody = ''
-            this._state.chatsPage.newMessageBody.push({id: 6, message: body})
-            this._callSubscriber()
-        }
+    dispatch(action) {
+        this._state.postsPage = profileReducer(this._state.postsPage, action)
+        this._state.chatsPage = chatsReducer(this._state.chatsPage, action)
+        this._callSubscriber()
     }
 }
 
