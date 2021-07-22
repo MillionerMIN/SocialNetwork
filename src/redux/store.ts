@@ -1,5 +1,6 @@
-import chatsReducer, { sendMessageAC, updateNewMessageAC } from "./chats-reducer"
-import profileReducer, { addPostAC, updateNewPostTextAC } from "./profile-reducer"
+import chatsReducer from "./chats-reducer"
+import profileReducer from "./profile-reducer"
+// import sidebarReducer from "./sidebar-reducer"
 
 
 
@@ -20,7 +21,9 @@ type DialogType = {
     name: string
     text: string
 }
-type SidebarType = {}
+// type SidebarType = {
+//    obj?: {}
+// }
 
 export type PostsPageType = {
     newPostText: string
@@ -35,7 +38,7 @@ export type ChatsPageType = {
 export type RootStateType = {
     postsPage: PostsPageType
     chatsPage: ChatsPageType
-    sidebar: SidebarType
+    // sidebar: SidebarType
 }
 
 export type StoreType = {
@@ -45,11 +48,10 @@ export type StoreType = {
     subscriber: (observer: () => void) => void
     // addPost: (newPostText: string) => void
     // updateNewPostTex: (newText: string) => void
-    dispatch: (action: ActionsTypes) => void
+    dispatch: (action: any) => void
 
 }
 
-export type ActionsTypes = ReturnType<typeof addPostAC> | ReturnType<typeof updateNewPostTextAC> | ReturnType<typeof sendMessageAC> | ReturnType<typeof updateNewMessageAC>
 
 export const store: StoreType = {
     _state: {
@@ -63,7 +65,7 @@ export const store: StoreType = {
         },
         chatsPage: {
             newMessageBody: '',
-           
+
             chats: [
                 { id: 1, message: 'Hi' },
                 { id: 2, message: 'How are you?' },
@@ -78,9 +80,9 @@ export const store: StoreType = {
                 { id: 5, name: 'Audrey Alexander', text: 'When you got it?' },
                 { id: 6, name: 'Design Conference', text: 'When you got it?' }
             ],
-             
+
         },
-        sidebar: {}
+        // sidebar: {}
     },
     _callSubscriber() {
         console.log('state changed')
@@ -93,9 +95,10 @@ export const store: StoreType = {
         this._callSubscriber = observer
     },
 
-    dispatch(action) {
+    dispatch(action: any) {
         this._state.postsPage = profileReducer(this._state.postsPage, action)
         this._state.chatsPage = chatsReducer(this._state.chatsPage, action)
+        // this._state.sidebar = sidebarReducer(this._state.sidebar, action)
         this._callSubscriber()
     }
 }

@@ -7,13 +7,15 @@ import { DialogsItem } from "./DialogsItem/DialogItem";
 //import css
 import c from '../Container.module.css';
 import s from './Chats.module.css';
-import { ActionsTypes, ChatsPageType} from '../../redux/state';
+import { ChatsPageType } from '../../redux/store';
+
+import { ActionsTypes } from '../../redux/chats-reducer';
 import { sendMessageAC, updateNewMessageAC } from '../../redux/chats-reducer';
 
 
 type ChatsPropsType = {
     chatsPage: ChatsPageType
-    dispatch: (action: ActionsTypes ) => void
+    dispatch: (action: ActionsTypes) => void
 
 }
 
@@ -31,7 +33,7 @@ function Chats(props: ChatsPropsType) {
     }
 
     let onNewMessageChange = (e: any) => {
-           let body = e.currentTarget.value;
+        let body = e.currentTarget.value;
         props.dispatch(updateNewMessageAC(body));
     }
 

@@ -9,7 +9,8 @@ import { Sidebar } from "./Sidebar/Sidebar";
 import container from '../Container.module.css';
 import s from './Posts.module.scss';
 import { MyPost } from './MyPost/MyPost';
-import {ActionsTypes, PostsPageType} from '../../redux/state';
+import {ActionsTypes} from '../../redux/profile-reducer';
+import { PostsPageType } from '../../redux/store';
 
 type PostsPropsType = {
     postsPage: PostsPageType

@@ -2,13 +2,12 @@ import React, { ChangeEvent } from 'react';
 import s from './NewPost.module.scss'
 import {ReactComponent as ReactSend} from './icons/send.svg'
 import {addPostAC, updateNewPostTextAC } from '../../../redux/profile-reducer';
-import { ActionsTypes } from '../../../redux/state';
+import { ActionsTypes } from '../../../redux/profile-reducer';
 
 
 type NewPostPropsType = {
     message: string
     dispatch: (action: ActionsTypes) => void
-
 }
 
 

@@ -1,6 +1,12 @@
 
 
-const sidebarReducer = (state:any, action: any) => {
+type SidebarType = {
+
+}
+
+const intilitionState: SidebarType = {}
+
+const sidebarReducer = (state = intilitionState, action: any) => {
 
 }
 
