@@ -5,8 +5,8 @@ import { Route } from 'react-router-dom';
 //import components
 import Navigation from './components/Navigation/Navigation';
 import Posts from './components/Posts/Posts';
-import Chats from './components/Chats/Chats';
 import { AppStateType, AppDispatchType } from './redux/redux-store';
+import ChatsContainer from './components/Chats/ChatsContainer';
 // import News from './components/News/News';
 // import Music from './components/Music/Music';
 // import Setting from './components/Setting/Setting';
@@ -26,7 +26,7 @@ const App = (props: AppPropsType) => {
             <Navigation />
             <Route path={'/posts'} render={() => <Posts postsPage={state.postsPage}
                 dispatch={props.dispatch} />} />
-            <Route path={'/chats'} render={() => <Chats chatsPage={state.chatsPage}
+            <Route path={'/chats'} render={() => <ChatsContainer chatsPage={state.chatsPage}
                 dispatch={props.dispatch} />} />
             {/* <Route path={'/news'} render={() => <News />} />
             <Route path={'/music'} render={() => <Music />} />

@@ -1,9 +1,5 @@
 import s from "./NewMess.module.scss";
 import React from "react";
-import {strict} from "assert";
-import {stringify} from "querystring";
-
-
 
 type NewMessPropsType = {
     messages: string

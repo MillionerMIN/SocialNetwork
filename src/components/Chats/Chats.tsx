@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {ChangeEvent} from 'react';
 
 //
 import { ChatMessage } from './ChatMessage/ChatMessage';
@@ -9,32 +9,26 @@ import c from '../Container.module.css';
 import s from './Chats.module.css';
 import { ChatsPageType } from '../../redux/store';
 
-import { ActionsTypes } from '../../redux/chats-reducer';
-import { sendMessageAC, updateNewMessageAC } from '../../redux/chats-reducer';
-
 
 type ChatsPropsType = {
-    chatsPage: ChatsPageType
-    dispatch: (action: ActionsTypes) => void
-
+    onSendNewMessageClick: () => void
+    state: ChatsPageType
+    onNewMessageChange: (body:any) => void
 }
-
 
 function Chats(props: ChatsPropsType) {
 
-    // let store = 
-
-    let dialogElements = props.chatsPage.dialog.map(c => <DialogsItem name={c.name} id={c.id} text={c.text} />)
-    let chatMessageElement = props.chatsPage.chats.map(m => <ChatMessage id={m.id} message={m.message} />)
-    let newMessageBody = props.chatsPage.newMessageBody
+    let dialogElements = props.state.dialog.map(c => <DialogsItem name={c.name} id={c.id} text={c.text} />)
+    let chatMessageElement = props.state.chats.map(m => <ChatMessage id={m.id} message={m.message} />)
+    let newMessageBody = props.state.newMessageBody
 
     let onSendNewMessageClick = () => {
-        props.dispatch(sendMessageAC())
+        props.onSendNewMessageClick();
     }
 
-    let onNewMessageChange = (e: any) => {
+    let onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         let body = e.currentTarget.value;
-        props.dispatch(updateNewMessageAC(body));
+        props.onNewMessageChange(body);
     }
 
     return (

@@ -1,7 +1,7 @@
 import React from 'react';
 
 //components
-import { NewPost } from "./NewPost/NewPost";
+
 import { Filter } from "./Filter/Filter";
 import { Sidebar } from "./Sidebar/Sidebar";
 
@@ -9,8 +9,9 @@ import { Sidebar } from "./Sidebar/Sidebar";
 import container from '../Container.module.css';
 import s from './Posts.module.scss';
 import { MyPost } from './MyPost/MyPost';
-import {ActionsTypes} from '../../redux/profile-reducer';
+import { ActionsTypes } from '../../redux/profile-reducer';
 import { PostsPageType } from '../../redux/store';
+import { NewPostContainer } from './NewPost/NewPostContainer';
 
 type PostsPropsType = {
     postsPage: PostsPageType
@@ -24,7 +25,7 @@ function Posts(props: PostsPropsType) {
         <div className={container.container}>
             <div className={s.post}>
                 <div className={s.newPost}>
-                    <NewPost message={props.postsPage.newPostText} dispatch={props.dispatch} />
+                    <NewPostContainer message={props.postsPage.newPostText} dispatch={props.dispatch} />
                     <Filter />
                     <div className={s.newPost_body}>
                         {postElement}
