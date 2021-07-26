@@ -2,9 +2,6 @@ import chatsReducer from "./chats-reducer"
 import profileReducer from "./profile-reducer"
 // import sidebarReducer from "./sidebar-reducer"
 
-
-
-
 export type PostType = {
     id: number
     messages: string
@@ -51,7 +48,6 @@ export type StoreType = {
     dispatch: (action: any) => void
 
 }
-
 
 export const store: StoreType = {
     _state: {
@@ -102,7 +98,6 @@ export const store: StoreType = {
         this._callSubscriber()
     }
 }
-
 
 export default store;
 // window.store = store

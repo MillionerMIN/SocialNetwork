@@ -1,4 +1,4 @@
-import React, {ChangeEvent} from 'react';
+import React, { ChangeEvent } from 'react';
 
 //
 import { ChatMessage } from './ChatMessage/ChatMessage';
@@ -13,7 +13,7 @@ import { ChatsPageType } from '../../redux/store';
 type ChatsPropsType = {
     onSendNewMessageClick: () => void
     state: ChatsPageType
-    onNewMessageChange: (body:any) => void
+    onNewMessageChange: (body: any) => void
 }
 
 function Chats(props: ChatsPropsType) {

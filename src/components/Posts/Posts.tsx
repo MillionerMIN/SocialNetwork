@@ -9,14 +9,12 @@ import { Sidebar } from "./Sidebar/Sidebar";
 import container from '../Container.module.css';
 import s from './Posts.module.scss';
 import { MyPost } from './MyPost/MyPost';
-import { ActionsTypes } from '../../redux/profile-reducer';
+import NewPostContainer from './NewPost/NewPostContainer';
 import { PostsPageType } from '../../redux/store';
-import { NewPostContainer } from './NewPost/NewPostContainer';
+
 
 type PostsPropsType = {
     postsPage: PostsPageType
-    dispatch: (action: ActionsTypes) => void
-
 }
 
 function Posts(props: PostsPropsType) {
@@ -25,7 +23,7 @@ function Posts(props: PostsPropsType) {
         <div className={container.container}>
             <div className={s.post}>
                 <div className={s.newPost}>
-                    <NewPostContainer message={props.postsPage.newPostText} dispatch={props.dispatch} />
+                    <NewPostContainer />
                     <Filter />
                     <div className={s.newPost_body}>
                         {postElement}
