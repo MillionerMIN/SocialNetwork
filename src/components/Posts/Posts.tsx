@@ -12,9 +12,11 @@ import { MyPost } from './MyPost/MyPost';
 import NewPostContainer from './NewPost/NewPostContainer';
 import { PostsPageType } from '../../redux/store';
 
-
 type PostsPropsType = {
     postsPage: PostsPageType
+    message: string
+    addPost: (postText: string) => void
+    newTextChangeHandler: (newText: string) => void
 }
 
 function Posts(props: PostsPropsType) {
@@ -23,7 +25,7 @@ function Posts(props: PostsPropsType) {
         <div className={container.container}>
             <div className={s.post}>
                 <div className={s.newPost}>
-                    <NewPostContainer />
+                    <NewPostContainer/>
                     <Filter />
                     <div className={s.newPost_body}>
                         {postElement}

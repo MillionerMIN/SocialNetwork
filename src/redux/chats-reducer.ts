@@ -41,15 +41,18 @@ const intilitionState: ChatsStateType = {
 
 const chatsReducer = (state = intilitionState, action: ActionsTypes): ChatsStateType => {
    switch (action.type) {
-      case UPDATE_NEW_MESSAGE_BODY:
-         state.newMessageBody = action.message
-         return state
-
+      case UPDATE_NEW_MESSAGE_BODY: {
+         const stateCopy = { ...state }
+         stateCopy.newMessageBody = action.message
+         return stateCopy
+      }
+         
       case SEND_MESSAGE:
-         let body = state.newMessageBody
-         state.newMessageBody = ''
-         state.chats.push({ id: 6, message: body })
-         return state
+         const stateCopy = { ...state }
+         let body = stateCopy.newMessageBody
+         stateCopy.newMessageBody = ''
+         stateCopy.chats.push({ id: 6, message: body })
+         return stateCopy
 
       default:
          return state

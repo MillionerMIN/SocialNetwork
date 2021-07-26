@@ -3,7 +3,7 @@ import s from './NewPost.module.scss'
 import { ReactComponent as ReactSend } from './icons/send.svg'
 
 type NewPostPropsType = {
-    message?: string
+    message: string
     addPost: (postText: string) => void
     newTextChangeHandler: (newText: string) => void
 }
