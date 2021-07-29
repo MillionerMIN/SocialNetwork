@@ -24,7 +24,7 @@ function Navigation() {
                                 <Item title={'Posts'} link={'../../Posts/Posts.tsx'} />
                                 <Item title={'Chats'} link={'../../Chats/Chats.tsx'} />
                                 <Item title={'news'} link={'../../News/News.tsx'} />
-                                <Item title={'music'} link={'../../Music/Music.tsx'} />
+                                <Item title={'users'} link={'../../Users/Users.tsx'} />
                                 <Item title={'setting'} link={'../../Setting/Setting.tsx'} />
                             </div>
                             <Search />

@@ -19,7 +19,7 @@ type ChatsPropsType = {
 function Chats(props: ChatsPropsType) {
 
     let dialogElements = props.state.dialog.map(c => <DialogsItem name={c.name} id={c.id} text={c.text} />)
-    let chatMessageElement = props.state.chats.map(m => <ChatMessage id={m.id} message={m.message} />)
+    let chatMessageElement = props.state.chats.map(m => <ChatMessage key={m.id} id={m.id} message={m.message} />)
     let newMessageBody = props.state.newMessageBody
 
     let onSendNewMessageClick = () => {

@@ -18,6 +18,17 @@ type DialogType = {
     name: string
     text: string
 }
+
+type UsersType = {
+    nameId: number
+    perPhoto: string
+    follow: boolean
+    fullName: string
+    location: {
+        country: string
+        cityName: string
+    }
+}
 // type SidebarType = {
 //    obj?: {}
 // }
@@ -32,9 +43,14 @@ export type ChatsPageType = {
     newMessageBody: string
 }
 
+export type UsersPageType = {
+    users: UsersType[]
+}
+
 export type RootStateType = {
     postsPage: PostsPageType
     chatsPage: ChatsPageType
+    usersPage: UsersPageType
     // sidebar: SidebarType
 }
 
@@ -78,6 +94,40 @@ export const store: StoreType = {
             ],
 
         },
+        usersPage: {
+            users: [
+                {
+                    nameId: 1,
+                    perPhoto: '',
+                    follow: false,
+                    fullName: 'Vladimir',
+                    location: {
+                        country: 'Belarus',
+                        cityName: 'Minsk',
+                    }
+                },
+                {
+                    nameId: 2,
+                    perPhoto: '',
+                    follow: true,
+                    fullName: 'Vladimir',
+                    location: {
+                        country: 'Russia',
+                        cityName: 'Moskow',
+                    }
+                },
+                {
+                    nameId: 3,
+                    perPhoto: '',
+                    follow: true,
+                    fullName: 'Anna',
+                    location: {
+                        country: 'Belarus',
+                        cityName: 'Minsk',
+                    }
+                }
+            ]
+        }
         // sidebar: {}
     },
     _callSubscriber() {
