@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { UsersPageType } from '../../redux/store';
 import { UsersType } from "../../redux/users-reducer";
 import axios from 'axios';
@@ -17,14 +17,11 @@ type UsersPropsType = {
 }
 
 class Users extends React.Component<UsersPropsType> {
-
-    constructor(props: UsersPropsType) {
-        super(props);
-
-    axios.get("https://social-network.samuraijs.com/api/1.0/users")
-        .then(response => {
-            this.props.setUsers(response.data.items)
-        })
+    componentDidMount() {
+        axios.get("https://social-network.samuraijs.com/api/1.0/users")
+            .then(response => {
+                this.props.setUsers(response.data.items)
+            })
     }
 
     render() {
