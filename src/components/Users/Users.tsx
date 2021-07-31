@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import { UsersPageType } from '../../redux/store';
 import { UsersType } from "../../redux/users-reducer";
 import axios from 'axios';
@@ -16,44 +16,43 @@ type UsersPropsType = {
 
 }
 
-function Users({ state, follow, unFollow, setUsers }: UsersPropsType) {
+class Users extends React.Component<UsersPropsType> {
 
-    const getUsers = () => {
-        if (state.users.length === 0) {
-            axios.get("https://social-network.samuraijs.com/api/1.0/users")
-                .then(response => {
-                    setUsers(response.data.items)
-                })
-        }
+    constructor(props: UsersPropsType) {
+        super(props);
+
+    axios.get("https://social-network.samuraijs.com/api/1.0/users")
+        .then(response => {
+            this.props.setUsers(response.data.items)
+        })
     }
-    
-    
-    return (
-        <div className={c.container} >
-            
-            <div className={s.users}>
-                <button className={s.button} onClick={getUsers}>Get Users</button>
-                {state.users.map(u => <div key={u.id} className={s.wrraper}>
-                    <div className={s.avatar}>
-                        <img src={u.photos.small !== null ? u.photos.small : photoUser} alt="avatar" />
-                        <div>
-                            <div>{u.name}</div>
-                            <div>{'u.location.country'}</div>
-                            <div>{'u.location.city'}</div>
+
+    render() {
+        return (
+            <div className={c.container} >
+                <div className={s.users}>
+                    {this.props.state.users.map(u => <div key={u.id} className={s.wrraper}>
+                        <div className={s.avatar}>
+                            <img src={u.photos.small !== null ? u.photos.small : photoUser} alt="avatar" />
+                            <div>
+                                <div>{u.name}</div>
+                                <div>{'u.location.country'}</div>
+                                <div>{'u.location.city'}</div>
+                            </div>
                         </div>
-                    </div>
-                    <div className={s.description}>
-                        <div className={s.line}></div>
-                        <div className={s.text}>
-                            Hey, I saw your works. I like it! Can we do something together? Or maybe you have project for UX at the moment?
+                        <div className={s.description}>
+                            <div className={s.line}></div>
+                            <div className={s.text}>
+                                Hey, I saw your works. I like it! Can we do something together? Or maybe you have project for UX at the moment?
+                            </div>
                         </div>
+                        {u.follow ? <button onClick={() => this.props.unFollow(u.id)}>UNFOLLOW</button> : <button onClick={() => this.props.follow(u.id)}>FOLLOW</button>}
                     </div>
-                    {u.follow ? <button onClick={() => unFollow(u.id)}>UNFOLLOW</button> : <button onClick={() => follow(u.id)}>FOLLOW</button>}
+                    )}
                 </div>
-                )}
             </div>
-        </div>
-    );
+        );
+    }
 }
 
 export default Users;
