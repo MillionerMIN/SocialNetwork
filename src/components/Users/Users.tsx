@@ -18,16 +18,21 @@ type UsersPropsType = {
 
 function Users({ state, follow, unFollow, setUsers }: UsersPropsType) {
 
-    if (state.users.length === 0) {
-        axios.get("https://social-network.samuraijs.com/api/1.0/users")
-        .then(response => {
-            setUsers(response.data.items)
-        })
+    const getUsers = () => {
+        if (state.users.length === 0) {
+            axios.get("https://social-network.samuraijs.com/api/1.0/users")
+                .then(response => {
+                    setUsers(response.data.items)
+                })
+        }
     }
+    
     
     return (
         <div className={c.container} >
+            
             <div className={s.users}>
+                <button className={s.button} onClick={getUsers}>Get Users</button>
                 {state.users.map(u => <div key={u.id} className={s.wrraper}>
                     <div className={s.avatar}>
                         <img src={u.photos.small !== null ? u.photos.small : photoUser} alt="avatar" />
