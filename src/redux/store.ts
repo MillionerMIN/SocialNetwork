@@ -20,12 +20,14 @@ type DialogType = {
 }
 
 export type UsersType = {
-    
-    nameId: number
-    perPhoto: string
+    id: number
+    name: string
+    photos: {
+        small: string
+        large: string
+    }
     follow: boolean
-    fullName: string
-    location: {
+    location?: {
         country: string
         city: string
     }
@@ -98,30 +100,42 @@ export const store: StoreType = {
         usersPage: {
             users: [
                 {
-                    nameId: 1,
-                    perPhoto: 'https://www.meme-arsenal.com/memes/4ab3e4977e380bf3b59ad6adafc725d4.jpg',
+                    id: 1,
+                    photos: {
+                        small: 'string',
+                        large: 'string'
+                    },
+                    // 'https://www.meme-arsenal.com/memes/4ab3e4977e380bf3b59ad6adafc725d4.jpg',
                     follow: false,
-                    fullName: 'Vladimir',
+                    name: 'Vladimir',
                     location: {
                         country: 'Belarus',
                         city: 'Minsk',
                     }
                 },
                 {
-                    nameId: 2,
-                    perPhoto: 'https://99px.ru/sstorage/56/2018/02/image_560602180105417871116.png',
-                    follow: true,
-                    fullName: 'Vladimir',
+                    id: 2,
+                    photos: {
+                        small: 'string',
+                        large: 'string'
+                    },
+                        //'https://99px.ru/sstorage/56/2018/02/image_560602180105417871116.png',
+                        follow: true,
+                    name: 'Vladimir',
                     location: {
                         country: 'Russia',
                         city: 'Moskow',
                     }
                 },
                 {
-                    nameId: 3,
-                    perPhoto: 'http://pm1.narvii.com/7157/52f82eabd0623d44c29d0dffdd446c6bae242576r1-259-267v2_00.jpg',
-                    follow: true,
-                    fullName: 'Anna',
+                    id: 3,
+                    photos: {
+                        small: 'string',
+                        large: 'string'
+                    },
+                        //'http://pm1.narvii.com/7157/52f82eabd0623d44c29d0dffdd446c6bae242576r1-259-267v2_00.jpg',
+                        follow: true,
+                    name: 'Anna',
                     location: {
                         country: 'Belarus',
                         city: 'Minsk',

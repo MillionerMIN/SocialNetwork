@@ -1,10 +1,10 @@
 .users {
     margin-top: 40px;
     padding-top: 10px;
+    padding-bottom: 10px;
     min-height: 10em;
     font-size: 2em;
     text-align: center;
-    background-color: #ffffff;
 
     .wrraper {
         display: grid;
@@ -14,9 +14,10 @@
         justify-content: center;
         justify-items: center;
         margin: 0 auto;
+        margin-bottom: 10px;
         width: 850px;
         height: 95px;
-        border: 1px solid #000;
+        background-color: #FFFFFF;
 
         .avatar {
             display: grid;

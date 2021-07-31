@@ -2,14 +2,17 @@ const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
 
-type UsersType = {
-   nameId: number
-    perPhoto: string
-    follow: boolean
-    fullName: string
-    location: {
+export type UsersType = {
+   id: number
+   name: string
+   photos: {
+      small: string
+      large: string
+   }
+   follow: boolean
+   location?: {
       country: string
-        city: string
+      city: string
    }
 }
 
@@ -17,41 +20,10 @@ export type UsersPageType = {
    users: Array<UsersType>
 }
 
-export type ActionsTypes = ReturnType<typeof followAC> |ReturnType<typeof unFollowAC> | ReturnType<typeof setUsersAC>
+export type ActionsTypes = ReturnType<typeof followAC> | ReturnType<typeof unFollowAC> | ReturnType<typeof setUsersAC>
 
 const intilitionState: UsersPageType = {
-   users: [
-      {
-         nameId: 1,
-         perPhoto: 'https://www.meme-arsenal.com/memes/4ab3e4977e380bf3b59ad6adafc725d4.jpg',
-         follow: false,
-         fullName: 'Vladimir',
-         location: {
-            country: 'Belarus',
-            city: 'Minsk',
-         }
-      },
-      {
-         nameId: 2,
-         perPhoto: 'https://99px.ru/sstorage/56/2018/02/image_560602180105417871116.png',
-         follow: true,
-         fullName: 'Vladimir',
-         location: {
-            country: 'Russia',
-            city: 'Moskow',
-         }
-      },
-      {
-         nameId: 3,
-         perPhoto: 'https://storage.googleapis.com/hipcomic/p/a126f1e4eb6486a015272202af4a5d5e-300.jpg',
-         follow: true,
-         fullName: 'Anna',
-         location: {
-            country: 'Belarus',
-            city: 'Minsk',
-         }
-      },
-   ]
+   users: []
 }
 
 
@@ -61,8 +33,8 @@ const usersReducer = (state = intilitionState, action: ActionsTypes): UsersPageT
          return {
             ...state,
             users: state.users.map(u => {
-               if (u.nameId === action.userId) {
-                  return {...u, follow: true}
+               if (u.id === action.userId) {
+                  return { ...u, follow: true }
                }
                return u;
             })
@@ -71,7 +43,7 @@ const usersReducer = (state = intilitionState, action: ActionsTypes): UsersPageT
          return {
             ...state,
             users: state.users.map(u => {
-               if (u.nameId === action.userId) {
+               if (u.id === action.userId) {
                   return { ...u, follow: false }
                }
                return u;
@@ -80,7 +52,7 @@ const usersReducer = (state = intilitionState, action: ActionsTypes): UsersPageT
       case SET_USERS:
          return {
             ...state,
-            users: [...state.users, ...action.users ]
+            users: [...state.users, ...action.users]
          }
       default:
          return state;
@@ -90,6 +62,6 @@ const usersReducer = (state = intilitionState, action: ActionsTypes): UsersPageT
 
 export const followAC = (userId: number) => ({ type: FOLLOW, userId } as const)
 export const unFollowAC = (userId: number) => ({ type: UNFOLLOW, userId } as const)
-export const setUsersAC = (users:[]) => ({ type: SET_USERS, users }as const)
+export const setUsersAC = (users: Array<UsersType>) => ({ type: SET_USERS, users } as const)
 
 export default usersReducer;

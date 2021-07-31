@@ -1,31 +1,40 @@
 import React from "react";
-import { UsersPageType} from '../../redux/store';
-
+import { UsersPageType } from '../../redux/store';
+import { UsersType } from "../../redux/users-reducer";
+import axios from 'axios';
+import photoUser from '../../img/icons/user.png';
 
 //import css
 import c from '../Container.module.css';
 import s from './Users.module.scss';
-// import { UsersPageType } from '../../redux/users-reducer';
 
 type UsersPropsType = {
     state: UsersPageType
     follow: (userId: number) => void
     unFollow: (userId: number) => void
-    setUsers: (users: []) => void
+    setUsers: (users: Array<UsersType>) => void
+
 }
 
-function Users({ state, follow, unFollow, setUsers}: UsersPropsType) {
+function Users({ state, follow, unFollow, setUsers }: UsersPropsType) {
 
+    if (state.users.length === 0) {
+        axios.get("https://social-network.samuraijs.com/api/1.0/users")
+        .then(response => {
+            setUsers(response.data.items)
+        })
+    }
+    
     return (
         <div className={c.container} >
             <div className={s.users}>
-                {state.users.map(u => <div key={u.nameId} className={s.wrraper}>
+                {state.users.map(u => <div key={u.id} className={s.wrraper}>
                     <div className={s.avatar}>
-                        <img src={u.perPhoto} alt="avatar" />
+                        <img src={u.photos.small !== null ? u.photos.small : photoUser} alt="avatar" />
                         <div>
-                            <div>{u.fullName}</div>
-                            <div>{u.location.country}</div>
-                            <div>{u.location.city}</div>
+                            <div>{u.name}</div>
+                            <div>{'u.location.country'}</div>
+                            <div>{'u.location.city'}</div>
                         </div>
                     </div>
                     <div className={s.description}>
@@ -34,7 +43,7 @@ function Users({ state, follow, unFollow, setUsers}: UsersPropsType) {
                             Hey, I saw your works. I like it! Can we do something together? Or maybe you have project for UX at the moment?
                         </div>
                     </div>
-                    {u.follow ? <button onClick={() => unFollow(u.nameId)}>UNFOLLOW</button> : <button onClick={() => follow(u.nameId)}>FOLLOW</button>}
+                    {u.follow ? <button onClick={() => unFollow(u.id)}>UNFOLLOW</button> : <button onClick={() => follow(u.id)}>FOLLOW</button>}
                 </div>
                 )}
             </div>
