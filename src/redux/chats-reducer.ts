@@ -12,7 +12,7 @@ type DialogType = {
    text: string
 }
 
-export type ChatsStateType = {
+export type ChatsPageType = {
    chats: Array<ChatMessageType>
    dialog: Array<DialogType>
    newMessageBody: string
@@ -20,7 +20,7 @@ export type ChatsStateType = {
 
 export type ActionsTypes = ReturnType<typeof sendMessageAC> | ReturnType<typeof updateNewMessageAC>
 
-const intilitionState: ChatsStateType = {
+const intilitionState: ChatsPageType = {
    newMessageBody: '',
 
    chats: [
@@ -39,7 +39,7 @@ const intilitionState: ChatsStateType = {
    ],
 }
 
-const chatsReducer = (state = intilitionState, action: ActionsTypes): ChatsStateType => {
+const chatsReducer = (state = intilitionState, action: ActionsTypes): ChatsPageType => {
    switch (action.type) {
       case UPDATE_NEW_MESSAGE_BODY: 
          return  { ...state,

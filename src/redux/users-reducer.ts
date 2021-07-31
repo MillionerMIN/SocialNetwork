@@ -1,4 +1,5 @@
-const TOGGLE_FOLLOW = 'TOGGLE_FOLLOW';
+const FOLLOW = 'FOLLOW';
+const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
 
 type UsersType = {
@@ -8,7 +9,7 @@ type UsersType = {
     fullName: string
     location: {
       country: string
-        cityName: string
+        city: string
    }
 }
 
@@ -16,38 +17,38 @@ export type UsersPageType = {
    users: Array<UsersType>
 }
 
-export type ActionsTypes = ReturnType<typeof toggleFollowAC> | ReturnType<typeof setUsersAC>
+export type ActionsTypes = ReturnType<typeof followAC> |ReturnType<typeof unFollowAC> | ReturnType<typeof setUsersAC>
 
 const intilitionState: UsersPageType = {
    users: [
       {
          nameId: 1,
-         perPhoto: '',
+         perPhoto: 'https://www.meme-arsenal.com/memes/4ab3e4977e380bf3b59ad6adafc725d4.jpg',
          follow: false,
          fullName: 'Vladimir',
          location: {
             country: 'Belarus',
-            cityName: 'Minsk',
+            city: 'Minsk',
          }
       },
       {
          nameId: 2,
-         perPhoto: '',
+         perPhoto: 'https://99px.ru/sstorage/56/2018/02/image_560602180105417871116.png',
          follow: true,
          fullName: 'Vladimir',
          location: {
             country: 'Russia',
-            cityName: 'Moskow',
+            city: 'Moskow',
          }
       },
       {
          nameId: 3,
-         perPhoto: '',
+         perPhoto: 'https://storage.googleapis.com/hipcomic/p/a126f1e4eb6486a015272202af4a5d5e-300.jpg',
          follow: true,
          fullName: 'Anna',
          location: {
             country: 'Belarus',
-            cityName: 'Minsk',
+            city: 'Minsk',
          }
       },
    ]
@@ -56,12 +57,22 @@ const intilitionState: UsersPageType = {
 
 const usersReducer = (state = intilitionState, action: ActionsTypes): UsersPageType => {
    switch (action.type) {
-      case TOGGLE_FOLLOW:
+      case FOLLOW:
          return {
             ...state,
             users: state.users.map(u => {
                if (u.nameId === action.userId) {
-                  return {...u, follow: !true}
+                  return {...u, follow: true}
+               }
+               return u;
+            })
+         }
+      case UNFOLLOW:
+         return {
+            ...state,
+            users: state.users.map(u => {
+               if (u.nameId === action.userId) {
+                  return { ...u, follow: false }
                }
                return u;
             })
@@ -77,7 +88,8 @@ const usersReducer = (state = intilitionState, action: ActionsTypes): UsersPageT
 
 }
 
-export const toggleFollowAC = (userId: number) => ({ type: TOGGLE_FOLLOW, userId } as const)
+export const followAC = (userId: number) => ({ type: FOLLOW, userId } as const)
+export const unFollowAC = (userId: number) => ({ type: UNFOLLOW, userId } as const)
 export const setUsersAC = (users:[]) => ({ type: SET_USERS, users }as const)
 
 export default usersReducer;

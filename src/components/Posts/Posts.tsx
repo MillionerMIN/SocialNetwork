@@ -10,17 +10,14 @@ import container from '../Container.module.css';
 import s from './Posts.module.scss';
 import { MyPost } from './MyPost/MyPost';
 import NewPostContainer from './NewPost/NewPostContainer';
-import { PostsPageType } from '../../redux/store';
+import { PostType } from '../../redux/store';
 
 type PostsPropsType = {
-    postsPage: PostsPageType
-    message: string
-    addPost: (postText: string) => void
-    newTextChangeHandler: (newText: string) => void
+    posts: Array<PostType>
 }
 
 function Posts(props: PostsPropsType) {
-    let postElement = props.postsPage.posts.map(p => <MyPost key={p.id} id={p.id} name={p.name} like={p.like} messages={p.messages} />)
+    let postElement = props.posts.map(p => <MyPost key={p.id} id={p.id} name={p.name} like={p.like} messages={p.messages} />)
     return (
         <div className={container.container}>
             <div className={s.post}>

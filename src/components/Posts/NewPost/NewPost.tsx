@@ -4,14 +4,14 @@ import { ReactComponent as ReactSend } from './icons/send.svg'
 
 type NewPostPropsType = {
     message: string
-    addPost: (postText: string) => void
+    addPost: () => void
     newTextChangeHandler: (newText: string) => void
 }
 
 export function NewPost(props: NewPostPropsType) {
 
-    const onAddPost = (postText: string) => {
-        props.addPost(postText)
+    const onAddPost = () => {
+        props.addPost()
     }
 
     const onNewTextChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -25,7 +25,7 @@ export function NewPost(props: NewPostPropsType) {
             <textarea className={s.textarea}
                 onChange={onNewTextChangeHandler}
                 value={props.message} placeholder='What’s on your mind?' />
-            <button className={s.btn} onClick={() => onAddPost}><ReactSend /></button>
+            <button className={s.btn} onClick={onAddPost}><ReactSend /></button>
         </div>
     </div>
 }

@@ -19,14 +19,15 @@ type DialogType = {
     text: string
 }
 
-type UsersType = {
+export type UsersType = {
+    
     nameId: number
     perPhoto: string
     follow: boolean
     fullName: string
     location: {
         country: string
-        cityName: string
+        city: string
     }
 }
 // type SidebarType = {
@@ -98,32 +99,32 @@ export const store: StoreType = {
             users: [
                 {
                     nameId: 1,
-                    perPhoto: '',
+                    perPhoto: 'https://www.meme-arsenal.com/memes/4ab3e4977e380bf3b59ad6adafc725d4.jpg',
                     follow: false,
                     fullName: 'Vladimir',
                     location: {
                         country: 'Belarus',
-                        cityName: 'Minsk',
+                        city: 'Minsk',
                     }
                 },
                 {
                     nameId: 2,
-                    perPhoto: '',
+                    perPhoto: 'https://99px.ru/sstorage/56/2018/02/image_560602180105417871116.png',
                     follow: true,
                     fullName: 'Vladimir',
                     location: {
                         country: 'Russia',
-                        cityName: 'Moskow',
+                        city: 'Moskow',
                     }
                 },
                 {
                     nameId: 3,
-                    perPhoto: '',
+                    perPhoto: 'http://pm1.narvii.com/7157/52f82eabd0623d44c29d0dffdd446c6bae242576r1-259-267v2_00.jpg',
                     follow: true,
                     fullName: 'Anna',
                     location: {
                         country: 'Belarus',
-                        cityName: 'Minsk',
+                        city: 'Minsk',
                     }
                 }
             ]

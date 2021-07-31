@@ -26,19 +26,13 @@ const intilitionState: PostsPageType = {
    ]
 }
 
-const profileReducer = (state = intilitionState, action: ActionsTypes) => {
+const profileReducer = (state = intilitionState, action: ActionsTypes): PostsPageType => {
 
    switch (action.type) {
       case ADD_POST: 
-         let newPost: PostType = {
-            id: new Date().getTime(),
-            messages: action.newPostText,
-            name: 'Kesha',
-            like: 0
-         };
          return {
             ...state,
-            messages: [...state.posts, newPost],
+            posts: [...state.posts, { id: new Date().getTime(), messages: state.newPostText, name: '1',like: 0 }],
             newPostText: '',
          }  
       case UPDATE_NEW_POST_TEXT: 
@@ -51,7 +45,7 @@ const profileReducer = (state = intilitionState, action: ActionsTypes) => {
    }
 }
 
-export const addPostAC = (postText: string) => ({ type: ADD_POST, newPostText: postText } as const)
+export const addPostAC = () => ({ type: ADD_POST} as const)
 
 export const updateNewPostTextAC = (newText: string) => ({ type: UPDATE_NEW_POST_TEXT, newText: newText } as const)
 

@@ -11,8 +11,8 @@ import { ChatsPageType } from '../../redux/store';
 
 
 type ChatsPropsType = {
-    onSendNewMessageClick: () => void
     state: ChatsPageType
+    onSendNewMessageClick: () => void
     onNewMessageChange: (body: any) => void
 }
 
