@@ -6,17 +6,25 @@
     font-size: 2em;
     text-align: center;
 
-    button {
-       width: 91px;
-       height: 32px;
-       font-size: 12px;
-       line-height: 11px;
-       text-align: center;
-       text-transform: uppercase;
-       color: #FFFFFF;
-       background: linear-gradient(180deg, #0077B5 0%, #0E6795 100%);
-       border-radius: 4px;
-       border: none;
+    .lists {
+        display: grid;
+        grid-auto-flow: column;
+        
+        button {
+            height: 20px;
+            font-size: 12px;
+            line-height: 11px;
+            text-align: center;
+            text-transform: uppercase;
+            color: #0077B5;
+            background: linear-gradient(180deg, #FFFFFF 51%, #cfe7f3 100%);
+            border-radius: 4px;
+            border: none;
+        }
+    }
+
+    .selectedPage {
+        font-weight: bold;
     }
 
     .wrraper {

@@ -26,7 +26,7 @@ export type UsersType = {
         small: string
         large: string
     }
-    follow: boolean
+    followed: boolean
     location?: {
         country: string
         city: string
@@ -106,7 +106,7 @@ export const store: StoreType = {
                         large: 'string'
                     },
                     // 'https://www.meme-arsenal.com/memes/4ab3e4977e380bf3b59ad6adafc725d4.jpg',
-                    follow: false,
+                    followed: false,
                     name: 'Vladimir',
                     location: {
                         country: 'Belarus',
@@ -120,7 +120,7 @@ export const store: StoreType = {
                         large: 'string'
                     },
                         //'https://99px.ru/sstorage/56/2018/02/image_560602180105417871116.png',
-                        follow: true,
+                        followed: true,
                     name: 'Vladimir',
                     location: {
                         country: 'Russia',
@@ -134,7 +134,7 @@ export const store: StoreType = {
                         large: 'string'
                     },
                         //'http://pm1.narvii.com/7157/52f82eabd0623d44c29d0dffdd446c6bae242576r1-259-267v2_00.jpg',
-                        follow: true,
+                        followed: true,
                     name: 'Anna',
                     location: {
                         country: 'Belarus',

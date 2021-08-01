@@ -1,0 +1,31 @@
+.footer {
+   margin-top: 2px;
+   width: 100%;
+   height: 214px;
+   background: #F7F9FB;
+
+   .wrapper{
+      display: grid;
+      grid-template-columns: auto 484px 170px 270px;
+      column-gap: 65px;
+      width: 1180px;
+      margin: 0 auto;
+
+      img{
+         margin-top: 30px;
+         width: 100%;
+      }
+
+      .navigation{
+         margin-top: 35px;
+      }
+
+      .access {
+         margin-top: 35px;
+      }
+
+      .language {
+         margin-top: 35px;
+      }
+   }
+}

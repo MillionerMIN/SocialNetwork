@@ -8,6 +8,7 @@ import Navigation from '../Navigation/Navigation';
 import ChatsContainer from '../Chats/ChatsContainer';
 import PostsContainer from '../Posts/PostsContainer';
 import UsersContainer from '../Users/UsersContainer';
+import { Footer } from '../Footer/Footer';
 
 // import News from './components/News/News';
 // import Setting from './components/Setting/Setting';
@@ -24,6 +25,7 @@ const App = () => {
             <Route path={'/users'} render={() => <UsersContainer />} />
             {/* <Route path={'/setting'} render={() => <Setting />} />
             <Route path={'/other'} render={() => <Other />} /> */}
+            <Footer/>
         </div>
     );
 }
