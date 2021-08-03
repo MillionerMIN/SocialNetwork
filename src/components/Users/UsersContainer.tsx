@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { AppDispatchType, AppStateType } from '../../redux/redux-store';
+import { AppStateType } from '../../redux/redux-store';
 import axios from 'axios';
-import { setUsersAC, followAC, unFollowAC, UsersType, setCurrentPageAC, setUsersTotalCountAC, UsersPageType, setIsFetchingAC } from '../../redux/users-reducer';
+import { setUsers, follow, unFollow, UsersType, setCurrentPage, setUsersTotalCount, UsersPageType, setIsFetching } from '../../redux/users-reducer';
 import { Users } from './Users';
 import { Spinner } from '../Spinner/Spinner';
 
@@ -28,7 +28,7 @@ class UsersWrapper extends React.Component<UsersPropsType> {
          .then(response => {
             this.props.setIsFetching(false)
             this.props.setUsers(response.data.items)
-            this.props.setUsersTotalCount(response.data.totalCount / 100) 
+            this.props.setUsersTotalCount(response.data.totalCount / 100)
          })
    }
 
@@ -68,29 +68,37 @@ const mapStateToProps = (state: AppStateType) => {
    }
 }
 
-const mapDispatchToProps = (dispatch: AppDispatchType) => {
-   return {
-      follow: (userId: number) => {
-         dispatch(followAC(userId))
-      },
-      unFollow: (userId: number) => {
-         dispatch(unFollowAC(userId))
-      },
-      setUsers: (users: Array<UsersType>) => {
-         dispatch(setUsersAC(users))
-      },
-      setCurrentPage: (pageNumber: number) => {
-         dispatch(setCurrentPageAC(pageNumber))
-      },
-      setUsersTotalCount: (totalCount: number) => {
-         dispatch(setUsersTotalCountAC(totalCount))
-      },
-      setIsFetching: (isFatching: boolean) => {
-         dispatch(setIsFetchingAC(isFatching))
-      }
-   }
-}
+// const mapDispatchToProps = (dispatch: AppDispatchType) => {
+//    return {
+//       follow: (userId: number) => {
+//          dispatch(followAC(userId))
+//       },
+//       unFollow: (userId: number) => {
+//          dispatch(unFollowAC(userId))
+//       },
+//       setUsers: (users: Array<UsersType>) => {
+//          dispatch(setUsersAC(users))
+//       },
+//       setCurrentPage: (pageNumber: number) => {
+//          dispatch(setCurrentPageAC(pageNumber))
+//       },
+//       setUsersTotalCount: (totalCount: number) => {
+//          dispatch(setUsersTotalCountAC(totalCount))
+//       },
+//       setIsFetching: (isFatching: boolean) => {
+//          dispatch(setIsFetchingAC(isFatching))
+//       }
+//    }
+// }
 
-const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersWrapper)
+const UsersContainer = connect(mapStateToProps,
+   {
+      follow,
+      unFollow,
+      setUsers,
+      setCurrentPage,
+      setUsersTotalCount,
+      setIsFetching
+   })(UsersWrapper)
 
 export default UsersContainer;
