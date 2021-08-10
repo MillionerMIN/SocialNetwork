@@ -9,6 +9,7 @@ const state = combineReducers({
    postsPage: profileReducer,
    chatsPage: chatsReducer,
    usersPage: usersReducer,
+   profilePage: profileReducer,
    // sidebar: sidebarReducer
 });
 
@@ -17,4 +18,11 @@ export type AppDispatchType = typeof store.dispatch;
 
 const store = createStore(state);
 
+
 export default store;
+declare const window: Window &
+   typeof globalThis & {
+   store: any
+   }
+
+window.store = store;

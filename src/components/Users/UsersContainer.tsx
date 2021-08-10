@@ -21,7 +21,7 @@ type UsersPropsType = {
    setIsFetching: (isFatching: boolean) => void
 }
 
-class UsersWrapper extends React.Component<UsersPropsType> {
+class UsersContainer extends React.Component<UsersPropsType> {
    componentDidMount() {
       this.props.setIsFetching(true)
       axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
@@ -91,7 +91,7 @@ const mapStateToProps = (state: AppStateType) => {
 //    }
 // }
 
-const UsersContainer = connect(mapStateToProps,
+ export default connect(mapStateToProps,
    {
       follow,
       unFollow,
@@ -99,6 +99,5 @@ const UsersContainer = connect(mapStateToProps,
       setCurrentPage,
       setUsersTotalCount,
       setIsFetching
-   })(UsersWrapper)
+    })(UsersContainer)
 
-export default UsersContainer;

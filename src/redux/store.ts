@@ -1,6 +1,7 @@
 import chatsReducer from "./chats-reducer"
 import profileReducer from "./profile-reducer"
 // import sidebarReducer from "./sidebar-reducer"
+import { ProfileType } from './profile-reducer';
 
 export type PostType = {
     id: number
@@ -32,13 +33,11 @@ export type UsersType = {
         city: string
     }
 }
-// type SidebarType = {
-//    obj?: {}
-// }
 
 export type PostsPageType = {
     newPostText: string
     posts: Array<PostType>
+    profile: null | ProfileType
 }
 export type ChatsPageType = {
     chats: Array<ChatMessageType>
@@ -54,7 +53,6 @@ export type RootStateType = {
     postsPage: PostsPageType
     chatsPage: ChatsPageType
     usersPage: UsersPageType
-    // sidebar: SidebarType
 }
 
 export type StoreType = {
@@ -76,7 +74,8 @@ export const store: StoreType = {
                 { id: 1, messages: 'care if Harry lost his place on the House Quidditch', name: 'Petr', like: 10 },
                 { id: 2, messages: 'What did the Dursleys care if Harry lost his place on ', name: 'Vova', like: 9 },
                 { id: 3, messages: 'What did the Dursleys care if Huse Quidditch', name: 'Anna', like: 20 }
-            ]
+            ],
+            profile: null,
         },
         chatsPage: {
             newMessageBody: '',
@@ -164,5 +163,5 @@ export const store: StoreType = {
     }
 }
 
-export default store;
+// export default store;
 // window.store = store

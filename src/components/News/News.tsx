@@ -1,7 +1,7 @@
 import React from 'react';
 
 //import css
-import c from '../Container.module.css';
+import c from '../Container.module.scss';
 import s from './News.module.css';
 
 function News() {

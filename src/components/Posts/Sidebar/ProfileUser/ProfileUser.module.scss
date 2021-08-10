@@ -1,0 +1,37 @@
+.profile {
+   position: relative;
+   background: #FFFFFF;
+
+
+   .bg {
+      width: 100%;
+      min-height: 120px;
+   }
+
+   .photo {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      top: 70px;
+      left: calc(50% - 50px);
+      border-radius: 100%;
+      border: 6px solid #FFFFFF;
+   }
+
+   .title {
+      padding-top: 65px;
+      text-align: center;
+      font-size: 14px;
+      font-weight: bold;
+      color: #181818;
+   }
+
+   .descr {
+      margin: 10px 25px 25px 25px;
+      max-height: 45px;
+      overflow: scroll;
+      font-size: 10px;
+      line-height: 150%;
+      text-align: center;
+   }
+}
