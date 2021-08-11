@@ -1,10 +1,10 @@
 
 import React from 'react';
-import axios from 'axios'
 import { connect } from 'react-redux';
 import { Login } from './Login';
 import { setAuthUserData, AuthType } from '../../redux/auth-reducer';
 import { AppStateType } from '../../redux/redux-store';
+import { userAPI } from '../../api/authApi';
 
 type LoginContainerType = {
    setAuthUserData: (
@@ -17,10 +17,10 @@ class LoginContainer extends React.Component<LoginContainerType & mapStateToProp
 
    componentDidMount() {
 
-      axios.get(`https://social-network.samuraijs.com/api/1.0//auth/me`, { withCredentials: true })
-         .then(response => {
-            if (response.data.resultCode === 0) {
-               let { email, id, login } = response.data.data
+      userAPI.getAuth()
+         .then(data => {
+            if (data.resultCode === 0) {
+               let { email, id, login } = data.data
                this.props.setAuthUserData(id, email, login)
             }
          })
