@@ -12,8 +12,6 @@ type ProfileUserPropsType = {
    profile: null | ProfileType
 }
 
-
-
 type MapStateToPropsType = {
    profile: null | ProfileType
 }
@@ -41,9 +39,5 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
    }
 }
 
-//let WithUpDataContainerComponents = withRouter(ProfileUserContainer);
-
-
-// export default connect(mapStateToProps, { setUsersProfile: setUsersProfileAC })(ProfileUserContainer);
 const connected = connect(mapStateToProps, { setUsersProfile: setUsersProfileAC })(ProfileUserContainer);
 export default withRouter(connected);

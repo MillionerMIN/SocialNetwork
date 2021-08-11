@@ -3,6 +3,7 @@ import chatsReducer from "./chats-reducer";
 import profileReducer from "./profile-reducer";
 import usersReducer from "./users-reducer";
 // import sidebarReducer from "./sidebar-reducer";
+import { authReducer } from './auth-reducer';
 
 
 const state = combineReducers({
@@ -10,6 +11,7 @@ const state = combineReducers({
    chatsPage: chatsReducer,
    usersPage: usersReducer,
    profilePage: profileReducer,
+   auth: authReducer,
    // sidebar: sidebarReducer
 });
 

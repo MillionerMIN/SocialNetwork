@@ -1,6 +1,7 @@
 import React from "react";
 import s from './ProfileUser.module.scss';
 import profileImg from '../../../../img/profile/ProfileImg.jpg'
+import profilePhoto from '../../../../img/icons/user.png'
 import { ProfileType } from "../../../../redux/profile-reducer";
 import { Spinner } from "../../../Spinner/Spinner";
 
@@ -15,7 +16,7 @@ const ProfileUser = (props: ProfileUserPropsType) => {
    return <div className={s.profile}>
       <img className={s.bg} src={profileImg} alt="profileImg" />
       <div>
-         <img className={s.photo} src={props.profile.photos.large} alt="photo" />
+         <img className={s.photo} src={props.profile.photos.large !== null ? props.profile.photos.large : profilePhoto} alt="photo" />
       </div>
       <div className={s.title}>{props.profile?.fullName}</div>
       <div className={s.descr}>{props.profile?.lookingForAJobDescription}</div>
