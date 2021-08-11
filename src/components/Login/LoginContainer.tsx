@@ -13,12 +13,12 @@ type LoginContainerType = {
       login: null | string) => void
 }
 
-class LoginContainer extends React.Component<LoginContainerType & mapStateToPropsType > {
+class LoginContainer extends React.Component<LoginContainerType & mapStateToPropsType> {
 
    componentDidMount() {
-      
+
       axios.get(`https://social-network.samuraijs.com/api/1.0//auth/me`, { withCredentials: true })
-         .then(response => {    
+         .then(response => {
             if (response.data.resultCode === 0) {
                let { email, id, login } = response.data.data
                this.props.setAuthUserData(id, email, login)

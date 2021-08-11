@@ -1,9 +1,10 @@
 import React from "react";
-import { UsersPageType} from '../../redux/users-reducer';
+import { UsersPageType } from '../../redux/users-reducer';
 import photoUser from '../../img/icons/user.png';
 import s from './Users.module.scss';
 import c from '../Container.module.scss'
 import { NavLink } from 'react-router-dom';
+import axios from 'axios'
 
 type UsersPropsType = {
    users: UsersPageType
@@ -12,7 +13,7 @@ type UsersPropsType = {
    currentPage: number
    follow: (userId: number) => void
    unFollow: (userId: number) => void
-   onPageChanget: (pageNumber:number) => void
+   onPageChanget: (pageNumber: number) => void
 }
 
 function Users({
@@ -54,11 +55,34 @@ function Users({
                      Hey, I saw your works. I like it! Can we do something together? Or maybe you have project for UX at the moment?
                   </div>
                </div>
-               {u.followed ? <button onClick={() => unFollow(u.id)}>UNFOLLOW</button> : <button onClick={() => follow(u.id)}>FOLLOW</button>}
+               {u.followed ?
+                  <button onClick={() =>
+                     axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {
+                        withCredentials: true,
+                        headers: { "API-KEY": 'd001792c-6a9d-4195-832e-06eaa9587214' }
+                     })
+                        .then(response => {
+                           if (response.data.resultCode === 0) {
+                              unFollow(u.id)
+                           }
+                        })
+                  }>UNFOLLOW</button>
+                  : <button onClick={() =>
+                     axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {}, {
+                        withCredentials: true,
+                        headers: { "API-KEY": 'd001792c-6a9d-4195-832e-06eaa9587214' }
+                     })
+                        .then(response => {
+                           if (response.data.resultCode === 0) {
+                              follow(u.id)
+                           }
+                        })
+                  }
+                  >FOLLOW</button>}
             </div>
             )}
          </div>
-      </div>
+      </div >
    );
 }
 

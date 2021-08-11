@@ -6,7 +6,7 @@ type AccountPropsType = {
     login: null | string
 }
 
-function Account({email, login }: AccountPropsType) {
+function Account({ email, login }: AccountPropsType) {
     return (
         <div className={s.account}>
             <a className={s.user}>
