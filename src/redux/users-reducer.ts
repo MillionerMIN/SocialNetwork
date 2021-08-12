@@ -4,6 +4,7 @@ const SET_USERS = 'SET_USERS';
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 const SET_USERS_TOTAL_COUNT = 'SET_USERS_TOTAL_COUNT';
 const SET_IS_FETCHING = 'SET_IS_FETCHING';
+const SET_IN_FOLLOWING = 'SET_IN_FOLLOWING';
 
 export type UsersType = {
    id: number
@@ -25,6 +26,7 @@ export type UsersPageType = {
    totalUsersCount: number
    currentPage: number
    isFatching: boolean
+   followingInProgress: number[]
 }
 
 export type ActionsTypes = ReturnType<typeof follow>
@@ -33,6 +35,7 @@ export type ActionsTypes = ReturnType<typeof follow>
    | ReturnType<typeof setCurrentPage>
    | ReturnType<typeof setUsersTotalCount>
    | ReturnType<typeof setIsFetching>
+   | ReturnType<typeof setFollowingInProgress>
 
 const intilitionState: UsersPageType = {
    users: [],
@@ -40,10 +43,11 @@ const intilitionState: UsersPageType = {
    totalUsersCount: 0,
    currentPage: 1,
    isFatching: false,
+   followingInProgress: [],
 }
 
 
-const usersReducer = (state = intilitionState, action: ActionsTypes): UsersPageType => {
+const usersReducer = (state: UsersPageType = intilitionState, action: ActionsTypes): UsersPageType => {
    switch (action.type) {
       case FOLLOW:
          return {
@@ -82,6 +86,13 @@ const usersReducer = (state = intilitionState, action: ActionsTypes): UsersPageT
          return {
             ...state, isFatching: action.isFatching
          }
+      case SET_IN_FOLLOWING:
+         return {
+            ...state,
+            followingInProgress: action.isFatching
+               ? [...state.followingInProgress, action.userId]
+               : state.followingInProgress.filter(id => id !== action.userId)
+         }
       default:
          return state;
    }
@@ -94,5 +105,6 @@ export const setUsers = (users: Array<UsersType>) => ({ type: SET_USERS, users }
 export const setCurrentPage = (currentPage: number) => ({ type: SET_CURRENT_PAGE, currentPage } as const)
 export const setUsersTotalCount = (totalCount: number) => ({ type: SET_USERS_TOTAL_COUNT, totalCount } as const)
 export const setIsFetching = (isFatching: boolean) => ({ type: SET_IS_FETCHING, isFatching } as const)
+export const setFollowingInProgress = (isFatching: boolean, userId: number) => ({ type: SET_IN_FOLLOWING, isFatching, userId } as const)
 
 export default usersReducer;

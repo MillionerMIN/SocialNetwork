@@ -76,7 +76,6 @@ const profileReducer = (state = intilitionState, action: ActionsTypes): PostsPag
 }
 
 export const addPostAC = () => ({ type: ADD_POST } as const)
-
 export const updateNewPostTextAC = (newText: string) => ({ type: UPDATE_NEW_POST_TEXT, newText } as const)
 export const setUsersProfileAC = (profile: ProfileType | null) => ({ type: SET_USERS_PROFILE, profile } as const)
 

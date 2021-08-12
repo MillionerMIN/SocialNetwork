@@ -9,7 +9,7 @@
     .lists {
         display: grid;
         grid-auto-flow: column;
-        
+
         button {
             height: 20px;
             font-size: 12px;
@@ -27,7 +27,7 @@
         font-weight: bold;
     }
 
-    .wrraper {
+    .wrapper {
         display: grid;
         grid-template-columns: 1fr 316px 1fr;
         column-gap: 50px;
@@ -82,7 +82,10 @@
             color: #FFFFFF;
             background: linear-gradient(180deg, #0077B5 0%, #0E6795 100%);
             border-radius: 4px;
-            border: none;
+            border: none;  
+        }
+        button:disabled {
+            background: linear-gradient(180deg, #cfe7f3 0%, #cfe7f3 100%);
         }
     }
 }

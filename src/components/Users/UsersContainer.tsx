@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { AppStateType } from '../../redux/redux-store';
-import { setUsers, follow, unFollow, UsersType, setCurrentPage, setUsersTotalCount, UsersPageType, setIsFetching } from '../../redux/users-reducer';
+import { setUsers, follow, unFollow, UsersType, setCurrentPage, setUsersTotalCount, UsersPageType, setIsFetching, setFollowingInProgress } from '../../redux/users-reducer';
 import { Users } from './Users';
 import { Spinner } from '../Spinner/Spinner';
 import { usersAPI } from '../../api/usersApi';
@@ -13,12 +13,23 @@ type UsersPropsType = {
    totalUsersCount: number
    currentPage: number
    isFatching: boolean
+   followingInProgress: number[]
    follow: (userId: number) => void
    unFollow: (userId: number) => void
    setUsers: (users: Array<UsersType>) => void
    setCurrentPage: (pageNumber: number) => void
    setUsersTotalCount: (totalCount: number) => void
    setIsFetching: (isFatching: boolean) => void
+   setFollowingInProgress: (isFatching: boolean, userId: number) => void
+}
+
+type MSTP = {
+   state: UsersPageType
+   pageSize: number
+   totalUsersCount: number
+   currentPage: number
+   isFatching: boolean
+   followingInProgress: number[]
 }
 
 class UsersContainer extends React.Component<UsersPropsType> {
@@ -53,18 +64,21 @@ class UsersContainer extends React.Component<UsersPropsType> {
             follow={this.props.follow}
             unFollow={this.props.unFollow}
             onPageChanget={this.onPageChanget}
+            followingInProgress={this.props.followingInProgress}
+            setFollowingInProgress={this.props.setFollowingInProgress}
          />
       </>
    }
 }
 
-const mapStateToProps = (state: AppStateType) => {
+const mapStateToProps = (state: AppStateType): MSTP => {
    return {
       state: state.usersPage,
       pageSize: state.usersPage.pageSize,
       totalUsersCount: state.usersPage.totalUsersCount,
       currentPage: state.usersPage.currentPage,
       isFatching: state.usersPage.isFatching,
+      followingInProgress: state.usersPage.followingInProgress
    }
 }
 
@@ -75,6 +89,8 @@ export default connect(mapStateToProps,
       setUsers,
       setCurrentPage,
       setUsersTotalCount,
-      setIsFetching
+      setIsFetching,
+      setFollowingInProgress
    })(UsersContainer)
 
+///

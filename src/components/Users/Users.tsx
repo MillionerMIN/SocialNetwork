@@ -14,6 +14,8 @@ type UsersPropsType = {
    follow: (userId: number) => void
    unFollow: (userId: number) => void
    onPageChanget: (pageNumber: number) => void
+   followingInProgress: number[]
+   setFollowingInProgress: (isFatching: boolean, userId: number) => void
 }
 
 function Users({
@@ -23,7 +25,9 @@ function Users({
    currentPage,
    follow,
    unFollow,
-   onPageChanget }: UsersPropsType) {
+   onPageChanget,
+   followingInProgress,
+   setFollowingInProgress }: UsersPropsType) {
    let pagesCount = Math.ceil(totalUsersCount / pageSize);
    let pages = [];
    for (let i = 1; i <= pagesCount; i++) {
@@ -38,7 +42,7 @@ function Users({
                   onClick={() => onPageChanget(p)}>{p}</button>
                )}
             </div>
-            {users.users.map(u => <div key={u.id} className={s.wrraper}>
+            {users.users.map(u => <div key={u.id} className={s.wrapper}>
                <div className={s.avatar}>
                   <NavLink to={'/profile/' + u.id}>
                      <img src={u.photos.small !== null ? u.photos.small : photoUser} alt="avatar" />
@@ -55,27 +59,30 @@ function Users({
                      Hey, I saw your works. I like it! Can we do something together? Or maybe you have project for UX at the moment?
                   </div>
                </div>
-               {u.followed ?
-                  <button onClick={() =>
+               {u.followed
+                  ? <button disabled={followingInProgress.some(id => id === u.id)}  onClick={() => {
+                     setFollowingInProgress(true, u.id);
                      usersAPI.deletFollow(u.id)
                         .then(data => {
                            if (data.resultCode === 0) {
                               unFollow(u.id)
                            }
-                        })
-                  }>UNFOLLOW</button>
-                  : <button onClick={() =>
+                           setFollowingInProgress(false, u.id)
+                        });
+                  }}>UNFOLLOW</button>
+                  : <button disabled={followingInProgress.some(id => id === u.id)} onClick={() => {
+                     setFollowingInProgress(true, u.id);
                      usersAPI.postFollow(u.id)
                         .then(data => {
                            if (data.resultCode === 0) {
                               follow(u.id)
                            }
+                           setFollowingInProgress(false, u.id);
                         })
-                  }
-                  >FOLLOW</button>}
+                  }}>FOLLOW</button>}
             </div>
             )}
-         </div>
+         </div >
       </div >
    );
 }
