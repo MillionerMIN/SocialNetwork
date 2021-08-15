@@ -4,7 +4,6 @@ import photoUser from '../../img/icons/user.png';
 import s from './Users.module.scss';
 import c from '../Container.module.scss'
 import { NavLink } from 'react-router-dom';
-import { usersAPI } from "../../api/followApi";
 
 type UsersPropsType = {
    users: UsersPageType
@@ -26,8 +25,7 @@ function Users({
    follow,
    unFollow,
    onPageChanget,
-   followingInProgress,
-   setFollowingInProgress }: UsersPropsType) {
+   followingInProgress, }: UsersPropsType) {
    let pagesCount = Math.ceil(totalUsersCount / pageSize);
    let pages = [];
    for (let i = 1; i <= pagesCount; i++) {
@@ -60,25 +58,11 @@ function Users({
                   </div>
                </div>
                {u.followed
-                  ? <button disabled={followingInProgress.some(id => id === u.id)}  onClick={() => {
-                     setFollowingInProgress(true, u.id);
-                     usersAPI.deletFollow(u.id)
-                        .then(data => {
-                           if (data.resultCode === 0) {
-                              unFollow(u.id)
-                           }
-                           setFollowingInProgress(false, u.id)
-                        });
+                  ? <button disabled={followingInProgress.some(id => id === u.id)} onClick={() => {
+                     unFollow(u.id)
                   }}>UNFOLLOW</button>
                   : <button disabled={followingInProgress.some(id => id === u.id)} onClick={() => {
-                     setFollowingInProgress(true, u.id);
-                     usersAPI.postFollow(u.id)
-                        .then(data => {
-                           if (data.resultCode === 0) {
-                              follow(u.id)
-                           }
-                           setFollowingInProgress(false, u.id);
-                        })
+                     follow(u.id)
                   }}>FOLLOW</button>}
             </div>
             )}

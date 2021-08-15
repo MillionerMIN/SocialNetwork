@@ -1,3 +1,6 @@
+import { Dispatch } from "redux";
+import { usersAPI } from "../api/usersApi";
+
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 const SET_USERS_PROFILE = 'SET_USERS_PROFILE';
@@ -41,6 +44,7 @@ export type ActionsTypes = ReturnType<typeof addPostAC>
    | ReturnType<typeof updateNewPostTextAC>
    | ReturnType<typeof setUsersProfileAC>
 
+
 const intilitionState: PostsPageType = {
    newPostText: '',
    posts: [
@@ -79,6 +83,15 @@ export const addPostAC = () => ({ type: ADD_POST } as const)
 export const updateNewPostTextAC = (newText: string) => ({ type: UPDATE_NEW_POST_TEXT, newText } as const)
 export const setUsersProfileAC = (profile: ProfileType | null) => ({ type: SET_USERS_PROFILE, profile } as const)
 
-export default profileReducer
+//THUNK
+export const getProfileTC = (userId: number) => (dispatch: Dispatch) => {
+   if (!userId) {
+      userId = 2;
+   }
+   usersAPI.getProfile(userId)
+      .then(data => {
+         dispatch(setUsersProfileAC(data));
+      })
+}
 
-
+export default profileReducer;

@@ -13,19 +13,18 @@ import ProfileUserContainer from '../Posts/Sidebar/ProfileUser/ProfileUserContai
 // import Setting from './components/Setting/Setting';
 // import Other from './components/Other/Other';
 
-
 const App = () => {
     return (
         <div>
             <Navigation />
-            <Route path={'/profile/:userId?'} render={() => <ProfileUserContainer/>}/>
-            <Route path={'/posts'} render={() => <PostsContainer/>} />
+            <Route path={'/profile/:userId?'} render={() => <ProfileUserContainer />} />
+            <Route path={'/posts'} render={() => <PostsContainer />} />
             <Route path={'/chats'} render={() => <ChatsContainer />} />
             {/* <Route path={'/news'} render={() => <News />} /> */}
             <Route path={'/users'} render={() => <UsersContainer />} />
             {/* <Route path={'/setting'} render={() => <Setting />} />
             <Route path={'/other'} render={() => <Other />} /> */}
-            <Footer/>
+            <Footer />
         </div>
     );
 }

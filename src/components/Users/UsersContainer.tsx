@@ -1,11 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { AppStateType } from '../../redux/redux-store';
-import { setUsers, follow, unFollow, UsersType, setCurrentPage, setUsersTotalCount, UsersPageType, setIsFetching, setFollowingInProgress } from '../../redux/users-reducer';
+import { follow, unFollow, setCurrentPage, UsersPageType, setFollowingInProgress, getUsersTC } from '../../redux/users-reducer';
 import { Users } from './Users';
 import { Spinner } from '../Spinner/Spinner';
-import { usersAPI } from '../../api/usersApi';
-
 
 type UsersPropsType = {
    state: UsersPageType
@@ -16,11 +14,9 @@ type UsersPropsType = {
    followingInProgress: number[]
    follow: (userId: number) => void
    unFollow: (userId: number) => void
-   setUsers: (users: Array<UsersType>) => void
    setCurrentPage: (pageNumber: number) => void
-   setUsersTotalCount: (totalCount: number) => void
-   setIsFetching: (isFatching: boolean) => void
    setFollowingInProgress: (isFatching: boolean, userId: number) => void
+   getUsersTC: (currentPage: number, pageSize: number) => void
 }
 
 type MSTP = {
@@ -34,23 +30,12 @@ type MSTP = {
 
 class UsersContainer extends React.Component<UsersPropsType> {
    componentDidMount() {
-      this.props.setIsFetching(true)
-      usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
-         .then(data => {
-            this.props.setIsFetching(false)
-            this.props.setUsers(data.items)
-            this.props.setUsersTotalCount(data.totalCount / 140)
-         })
+      this.props.getUsersTC(this.props.currentPage, this.props.pageSize)
    }
 
    onPageChanget = (pageNumber: number) => {
+      this.props.getUsersTC(pageNumber, this.props.pageSize)
       this.props.setCurrentPage(pageNumber)
-      this.props.setIsFetching(true)
-      usersAPI.getUsers(pageNumber, this.props.pageSize)
-         .then(data => {
-            this.props.setIsFetching(false)
-            this.props.setUsers(data.items)
-         })
    }
 
    render() {
@@ -86,11 +71,7 @@ export default connect(mapStateToProps,
    {
       follow,
       unFollow,
-      setUsers,
       setCurrentPage,
-      setUsersTotalCount,
-      setIsFetching,
-      setFollowingInProgress
+      setFollowingInProgress,
+      getUsersTC,
    })(UsersContainer)
-
-///
