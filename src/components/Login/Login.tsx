@@ -6,7 +6,7 @@ import s from './Login.module.scss';
 
 type LoginPropsType = {
    auth: AuthType
-   setAuthUserData: (
+   getAuthUserDataTC: (
       id: null | number,
       email: null | string,
       login: null | string) => void

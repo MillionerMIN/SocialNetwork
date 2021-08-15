@@ -1,13 +1,11 @@
-
 import React from 'react';
 import { connect } from 'react-redux';
 import { Login } from './Login';
-import { setAuthUserData, AuthType } from '../../redux/auth-reducer';
+import { getAuthUserDataTC, AuthType } from '../../redux/auth-reducer';
 import { AppStateType } from '../../redux/redux-store';
-import { userAPI } from '../../api/authApi';
 
 type LoginContainerType = {
-   setAuthUserData: (
+   getAuthUserDataTC: (
       id: null | number,
       email: null | string,
       login: null | string) => void
@@ -16,14 +14,7 @@ type LoginContainerType = {
 class LoginContainer extends React.Component<LoginContainerType & mapStateToPropsType> {
 
    componentDidMount() {
-
-      userAPI.getAuth()
-         .then(data => {
-            if (data.resultCode === 0) {
-               let { email, id, login } = data.data
-               this.props.setAuthUserData(id, email, login)
-            }
-         })
+      this.props.getAuthUserDataTC(this.props.auth.id, this.props.auth.email, this.props.auth.email)
    }
    render() {
       return <Login {...this.props} />
@@ -40,4 +31,4 @@ const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
    }
 }
 
-export default connect(mapStateToProps, { setAuthUserData })(LoginContainer)
+export default connect(mapStateToProps, { getAuthUserDataTC })(LoginContainer)
