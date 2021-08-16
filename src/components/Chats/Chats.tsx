@@ -1,22 +1,24 @@
 import React, { ChangeEvent } from 'react';
 
+import { Redirect } from 'react-router';
 //
+import { ChatsPageType } from '../../redux/store';
 import { ChatMessage } from './ChatMessage/ChatMessage';
 import { DialogsItem } from "./DialogsItem/DialogItem";
-
 //import css
 import c from '../Container.module.scss';
 import s from './Chats.module.css';
-import { ChatsPageType } from '../../redux/store';
-
 
 type ChatsPropsType = {
     state: ChatsPageType
+    isAuth: boolean
     onSendNewMessageClick: () => void
     onNewMessageChange: (body: any) => void
 }
 
 function Chats(props: ChatsPropsType) {
+
+    if (!props.isAuth) return <Redirect to='/login' />;
 
     let dialogElements = props.state.dialog.map(c => <DialogsItem key={c.id} name={c.name} id={c.id} text={c.text} />)
     let chatMessageElement = props.state.chats.map(m => <ChatMessage key={m.id} id={m.id} message={m.message} />)

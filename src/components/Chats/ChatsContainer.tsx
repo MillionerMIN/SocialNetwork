@@ -5,7 +5,8 @@ import { AppStateType, AppDispatchType } from '../../redux/redux-store';
 
 const mapStateToProps = (state: AppStateType) => {
     return {
-        state: state.chatsPage
+        state: state.chatsPage,
+        isAuth: state.auth.isAuth
     }
 }
 

@@ -5,7 +5,8 @@ import Posts from './Posts';
 
 const mapStateToProps = (state: AppStateType) => {
     return {
-        posts: state.postsPage.posts
+        posts: state.postsPage.posts,
+        isAuth: state.auth.isAuth
     }
 }
 // const mapDispatchToProps = (dispatch: AppDispatchType) => {
