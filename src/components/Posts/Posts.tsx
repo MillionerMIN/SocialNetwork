@@ -11,7 +11,6 @@ import s from './Posts.module.scss';
 import { MyPost } from './MyPost/MyPost';
 import {NewPostContainer} from './NewPost/NewPostContainer';
 import { PostType } from '../../redux/store';
-import { Redirect } from 'react-router';
 
 type PostsPropsType = {
     posts: Array<PostType>
@@ -20,7 +19,6 @@ type PostsPropsType = {
 
 function Posts(props: PostsPropsType) {
 
-    if (!props.isAuth) return <Redirect to='/login'/>;
     let postElement = props.posts.map(p => <MyPost key={p.id} id={p.id} name={p.name} like={p.like} messages={p.messages} />)
     return (
         <div className={c.container}>
@@ -37,5 +35,7 @@ function Posts(props: PostsPropsType) {
         </div>
     );
 }
+
+
 
 export default Posts;

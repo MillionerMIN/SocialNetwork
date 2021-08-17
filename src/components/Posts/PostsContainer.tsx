@@ -1,7 +1,24 @@
+import { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
+
+import { PostType } from '../../redux/profile-reducer';
 
 import { AppStateType } from '../../redux/redux-store';
 import Posts from './Posts';
+import { withAuthRedirect } from '../../hoc/WithAuthRedirect';
+
+type PostContainerType = {
+    posts: PostType[]
+    isAuth: boolean
+}
+
+export class PostContainer extends Component<PostContainerType>{
+    render() {
+        //@ts-ignore
+        return <Posts {...this.props}/>
+    }
+}
 
 const mapStateToProps = (state: AppStateType) => {
     return {
@@ -9,17 +26,14 @@ const mapStateToProps = (state: AppStateType) => {
         isAuth: state.auth.isAuth
     }
 }
-// const mapDispatchToProps = (dispatch: AppDispatchType) => {
-//     return {
-//         addPost: (postText: string) => {
-//             dispatch(addPostAC(postText))
-//         },
-//         newTextChangeHandler: (newText: string) => {
-//             dispatch(updateNewMessageAC(newText))
-//         }
-//     }
+
+// const AuthRedirectComponent = (props: any) => {
+//     if (!props.isAuth) return <Redirect to='/login' />;
+//     return <PostContainer {...props} />;
 // }
 
-const PostContainer = connect(mapStateToProps, {})(Posts)
+const AuthRedirectComponent = withAuthRedirect(PostContainer)
+ //@ts-ignore
+const WithUrlContainerComponent = withRouter(AuthRedirectComponent);
 
-export default PostContainer;
+export default connect(mapStateToProps, {})(WithUrlContainerComponent)
