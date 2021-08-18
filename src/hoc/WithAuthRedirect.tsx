@@ -1,26 +1,25 @@
-import React, { Component } from "react";
+import React, {  ComponentType } from "react";
 import { Redirect } from "react-router";
 import { AppStateType } from "../redux/redux-store";
 import { connect } from 'react-redux';
 
 
-// interface AwaysCoolStateProps {
-//    isAuth: boolean;
-// }
-const mapStateToPropsForRiderect = (state: AppStateType) => {
+type MSTPType = {
+   isAuth: boolean
+}
+
+const mapStateToPropsForRiderect = (state: AppStateType): MSTPType => {
    return {
       isAuth: state.auth.isAuth
    }
 }
 
-export const withAuthRedirect = (ChildComp: React.ComponentType<any | string>) => {
+export function withAuthRedirect <T>(ChildComp: ComponentType<T>) {
 
-   class RedirectComponent extends Component {
-      render() {
-         //@ts-ignore
-         if (!this.props.isAuth) return <Redirect to='/login' />;
-         return <ChildComp {...this.props} />
-      }
+   const RedirectComponent = (props: MSTPType)=> {
+      const {isAuth, ...restProps} = props;
+      if (!isAuth) return <Redirect to='/login' />;
+      return <ChildComp {...restProps as T} />
    }
    let ConnectedRedirectComponent = connect(mapStateToPropsForRiderect)(RedirectComponent)
    return ConnectedRedirectComponent;

@@ -1,16 +1,12 @@
 import React from 'react';
-
-//components
-
 import { Filter } from "./Filter/Filter";
 import { Sidebar } from "./Sidebar/Sidebar";
+import { MyPost } from './MyPost/MyPost';
+import { NewPostContainer } from './NewPost/NewPostContainer';
+import { PostType } from '../../redux/store';
 
-//import css
 import c from '../Container.module.scss';
 import s from './Posts.module.scss';
-import { MyPost } from './MyPost/MyPost';
-import {NewPostContainer} from './NewPost/NewPostContainer';
-import { PostType } from '../../redux/store';
 
 type PostsPropsType = {
     posts: Array<PostType>
@@ -24,7 +20,7 @@ function Posts(props: PostsPropsType) {
         <div className={c.container}>
             <div className={s.post}>
                 <div className={s.newPost}>
-                    <NewPostContainer/>
+                    <NewPostContainer />
                     <Filter />
                     <div className={s.newPost_body}>
                         {postElement}

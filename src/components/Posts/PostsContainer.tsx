@@ -5,20 +5,24 @@ import { PostType } from '../../redux/profile-reducer';
 import { AppStateType } from '../../redux/redux-store';
 import Posts from './Posts';
 import { withAuthRedirect } from '../../hoc/WithAuthRedirect';
+import { compose } from 'redux';
 
 type PostContainerType = {
     posts: PostType[]
     isAuth: boolean
 }
 
+type MSTPType = {
+    posts: PostType[]
+}
+
 export class PostContainer extends Component<PostContainerType>{
     render() {
-        //@ts-ignore
-        return <Posts {...this.props}/>
+        return <Posts {...this.props} />
     }
 }
 
-const mapStateToProps = (state: AppStateType) => {
+const mapStateToProps = (state: AppStateType): MSTPType => {
     return {
         posts: state.postsPage.posts,
     }
@@ -27,9 +31,8 @@ const mapStateToProps = (state: AppStateType) => {
 //     if (!props.isAuth) return <Redirect to='/login' />;
 //     return <PostContainer {...props} />;
 // }
-
-const AuthRedirectComponent = withAuthRedirect(PostContainer)
- //@ts-ignore
-const WithUrlContainerComponent = withRouter(AuthRedirectComponent);
-
-export default connect(mapStateToProps, {})(WithUrlContainerComponent)
+export default compose<React.ComponentType>(
+    connect(mapStateToProps),
+    withRouter,
+    withAuthRedirect
+)(PostContainer);

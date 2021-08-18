@@ -5,7 +5,7 @@ import { AppStateType } from '../../redux/redux-store';
 import { Component } from 'react';
 import { withAuthRedirect } from '../../hoc/WithAuthRedirect';
 import { withRouter } from 'react-router';
-
+import { compose } from 'redux';
 
 
 class ChatsContainer extends Component {
@@ -21,19 +21,8 @@ const mapStateToProps = (state: AppStateType) => {
     }
 }
 
-// const mapDispatchToProps = (dispatch: AppDispatchType) => {
-//     return {
-//         onSendNewMessageClick: () => {
-//             dispatch(sendMessageAC())
-//         },
-//         onNewMessageChange: (body: any) => {
-//             dispatch(updateNewMessageAC(body));
-//         }
-//     }
-// }
-
-const AuthRedirectComponent = withAuthRedirect(ChatsContainer)
-//@ts-ignore
-const WithUrlContainerComponent = withRouter(AuthRedirectComponent)
-
-export default connect(mapStateToProps, { sendMessageAC, updateNewMessageAC })(WithUrlContainerComponent);
+export default compose<React.ComponentType>(
+    connect(mapStateToProps, { sendMessageAC, updateNewMessageAC }),
+    withRouter,
+    withAuthRedirect
+)(ChatsContainer);
