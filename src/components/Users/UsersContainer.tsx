@@ -4,6 +4,8 @@ import { AppStateType } from '../../redux/redux-store';
 import { follow, unFollow, setCurrentPage, UsersPageType, setFollowingInProgress, getUsersTC } from '../../redux/users-reducer';
 import { Users } from './Users';
 import { Spinner } from '../Spinner/Spinner';
+import { withAuthRedirect } from '../../hoc/WithAuthRedirect';
+import { withRouter } from 'react-router';
 
 type UsersPropsType = {
    state: UsersPageType
@@ -66,6 +68,10 @@ const mapStateToProps = (state: AppStateType): MSTP => {
       followingInProgress: state.usersPage.followingInProgress
    }
 }
+let AuthRedirectComponent = withAuthRedirect(UsersContainer)
+
+//@ts-ignore
+const WithUrlContainerComponent = withRouter(AuthRedirectComponent);
 
 export default connect(mapStateToProps,
    {
@@ -74,4 +80,4 @@ export default connect(mapStateToProps,
       setCurrentPage,
       setFollowingInProgress,
       getUsersTC,
-   })(UsersContainer)
+   })(WithUrlContainerComponent)

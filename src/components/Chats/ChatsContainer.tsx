@@ -1,26 +1,39 @@
 import { sendMessageAC, updateNewMessageAC } from '../../redux/chats-reducer';
 import Chats from './Chats';
 import { connect } from 'react-redux';
-import { AppStateType, AppDispatchType } from '../../redux/redux-store';
+import { AppStateType } from '../../redux/redux-store';
+import { Component } from 'react';
+import { withAuthRedirect } from '../../hoc/WithAuthRedirect';
+import { withRouter } from 'react-router';
+
+
+
+class ChatsContainer extends Component {
+    render() {
+        //@ts-ignore
+        return <Chats {...this.props} />
+    }
+}
 
 const mapStateToProps = (state: AppStateType) => {
     return {
         state: state.chatsPage,
-        isAuth: state.auth.isAuth
     }
 }
 
-const mapDispatchToProps = (dispatch: AppDispatchType) => {
-    return {
-        onSendNewMessageClick: () => {
-            dispatch(sendMessageAC())
-        },
-        onNewMessageChange: (body: any) => {
-            dispatch(updateNewMessageAC(body));
-        }
-    }
-}
+// const mapDispatchToProps = (dispatch: AppDispatchType) => {
+//     return {
+//         onSendNewMessageClick: () => {
+//             dispatch(sendMessageAC())
+//         },
+//         onNewMessageChange: (body: any) => {
+//             dispatch(updateNewMessageAC(body));
+//         }
+//     }
+// }
 
-const ChatsContainer = connect(mapStateToProps, mapDispatchToProps)(Chats);
+const AuthRedirectComponent = withAuthRedirect(ChatsContainer)
+//@ts-ignore
+const WithUrlContainerComponent = withRouter(AuthRedirectComponent)
 
-export default ChatsContainer;
+export default connect(mapStateToProps, { sendMessageAC, updateNewMessageAC })(WithUrlContainerComponent);

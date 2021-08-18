@@ -1,7 +1,4 @@
 import React, { ChangeEvent } from 'react';
-
-import { Redirect } from 'react-router';
-//
 import { ChatsPageType } from '../../redux/store';
 import { ChatMessage } from './ChatMessage/ChatMessage';
 import { DialogsItem } from "./DialogsItem/DialogItem";
@@ -17,8 +14,6 @@ type ChatsPropsType = {
 }
 
 function Chats(props: ChatsPropsType) {
-
-    if (!props.isAuth) return <Redirect to='/login' />;
 
     let dialogElements = props.state.dialog.map(c => <DialogsItem key={c.id} name={c.name} id={c.id} text={c.text} />)
     let chatMessageElement = props.state.chats.map(m => <ChatMessage key={m.id} id={m.id} message={m.message} />)
