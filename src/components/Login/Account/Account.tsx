@@ -9,8 +9,8 @@ type AccountPropsType = {
 function Account({ email, login }: AccountPropsType) {
     return (
         <div className={s.account}>
-            <a className={s.user}>
-                <img src='https://whatsism.com/uploads/posts/2018-07/1530546770_rmk_vdjbx10.jpg' />
+            <a className={s.user} href='#1'>
+                <img src='https://whatsism.com/uploads/posts/2018-07/1530546770_rmk_vdjbx10.jpg' alt='userPhoto' />
             </a>
             <div className={s.wrapper}>
                 <div className={s.title}>{login}</div>

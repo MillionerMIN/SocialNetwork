@@ -114,18 +114,18 @@ export const setFollowingInProgress = (isFatching: boolean, userId: number) => (
 export const getUsersTC = (currentPage: number, pageSize: number) => (dispatch: Dispatch) => {
    dispatch(setIsFetching(true));
    usersAPI.getUsers(currentPage, pageSize)
-      .then(data => {
+      .then(res => {
          dispatch(setIsFetching(false))
-         dispatch(setUsers(data.items))
-         dispatch(setUsersTotalCount(data.totalCount / 140))
+         dispatch(setUsers(res.data.items))
+         dispatch(setUsersTotalCount(res.data.totalCount / 140))
       })
 }
 
 export const follow = (userId: number) => (dispatch: Dispatch) => {
    dispatch(setFollowingInProgress(true, userId))
    usersAPI.postFollow(userId)
-      .then(data => {
-         if (data.resultCode === 0) {
+      .then(res => {
+         if (res.data.resultCode === 0) {
             dispatch(followAC(userId))
          }
          dispatch(setFollowingInProgress(false, userId))
@@ -135,8 +135,8 @@ export const follow = (userId: number) => (dispatch: Dispatch) => {
 export const unFollow = (userId: number) => (dispatch: Dispatch) => {
    dispatch(setFollowingInProgress(true, userId))
    usersAPI.deletFollow(userId)
-      .then(data => {
-         if (data.resultCode === 0) {
+      .then(res => {
+         if (res.data.resultCode === 0) {
             dispatch(unFollowAC(userId))
          }
          dispatch(setFollowingInProgress(false, userId))

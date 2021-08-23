@@ -1,37 +1,50 @@
 import React, { useState } from "react";
 import s from './ProfileUser.module.scss';
-import profileImg from '../../../../img/profile/ProfileImg.jpg'
+import profileBg from '../../../../img/profile/ProfileImg.jpg'
 import profilePhoto from '../../../../img/icons/user.png'
 import { ProfileType } from "../../../../redux/profile-reducer";
 import { Spinner } from "../../../Spinner/Spinner";
 
 type ProfileUserPropsType = {
    profile: null | ProfileType
+   status: string
+   updateStatus: (status: string) => void
 }
 
 const ProfileUser = (props: ProfileUserPropsType) => {
-   
+  
    const [editMode, setEditMode] = useState<boolean>(false);
-   const { profile } = props;
+   const [newStatus, setNewStatus] = useState<string >('')
+   const { profile, status, updateStatus } = props;
 
-   const toggleEditMode = () => {
-      setEditMode(!editMode)
+   const activetEditMod =() => {
+      setEditMode( true )
+   }
+
+   const diactivatEditMod = () => {
+      setEditMode(false);
+      updateStatus(newStatus);
+   }
+
+   const onChangeStatus = (e: React.ChangeEvent<HTMLInputElement>) => {
+      setNewStatus(e.currentTarget.value)
    }
 
    if (!profile) {
       return <Spinner />
    }
    return <div className={s.profile}>
-      <img className={s.bg} src={profileImg} alt="profileImg" />
+      <img className={s.bg} src={profileBg} alt="profileImg" />
       <div>
          <img className={s.photo} src={profile.photos.large !== null ? profile.photos.large : profilePhoto} alt="userPhoto" />
       </div>
+      {/* <div className={s.status}>{status}</div> */}
       <div className={s.title}>{props.profile?.fullName}</div>
       {!editMode &&
-         <div onDoubleClick={toggleEditMode} className={s.descr}>{profile?.lookingForAJobDescription}</div>
+         <span onDoubleClick={activetEditMod} className={s.descr}>{status || '---'}</span>
       }
       {editMode &&
-         <input onBlur={toggleEditMode} autoFocus className={s.descr} value={profile?.lookingForAJobDescription} />
+         <input onChange={onChangeStatus} onBlur={diactivatEditMod} autoFocus className={s.descr} value={status} />
       }
    </div>
 }

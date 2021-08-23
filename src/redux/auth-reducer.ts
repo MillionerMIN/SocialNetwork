@@ -43,9 +43,9 @@ export const setAuthUserDataAC = (
 //ThUNK
 export const getAuthUserDataTC = () => (dispatch: Dispatch) => {
    authAPI.getAuth()
-      .then(data => {
-         if (data.resultCode === 0) {
-            let { email, id, login } = data.data
+      .then(res => {
+         if (res.data.resultCode === 0) {
+            let { email, id, login } = res.data.data
             dispatch(setAuthUserDataAC(id, email, login))
          }
       })

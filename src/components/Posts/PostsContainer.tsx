@@ -14,6 +14,7 @@ type PostContainerType = {
 
 type MSTPType = {
     posts: PostType[]
+   
 }
 
 export class PostContainer extends Component<PostContainerType>{
@@ -24,7 +25,7 @@ export class PostContainer extends Component<PostContainerType>{
 
 const mapStateToProps = (state: AppStateType): MSTPType => {
     return {
-        posts: state.postsPage.posts,
+        posts: state.postsPage.posts
     }
 }
 // const AuthRedirectComponent = (props: any) => {

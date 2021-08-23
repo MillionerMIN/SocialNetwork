@@ -1,5 +1,5 @@
 import React from "react";
-import axios from 'axios';
+// import axios from 'axios';
 import c from '../Container.module.scss'
 import s from './ProfilePage.module.scss'
 
@@ -15,10 +15,10 @@ type ProfilePagePropsType = {
 export class ProfilePageContainer extends React.Component<ProfilePagePropsType> {
 
    componentDidMount() {
-      axios.get(`https://social-network.samuraijs.com/api/1.0/profile/2`)
-         .then(response => {
-            this.props.setUsersProfile(response.data)
-         })
+      // axios.get(`https://social-network.samuraijs.com/api/1.0/profile/2`)
+      //    .then(response => {
+      //       this.props.setUsersProfile(response.data)
+      //    })
    }
    render() {
       return <div className={c.container}>
@@ -33,4 +33,4 @@ export class ProfilePageContainer extends React.Component<ProfilePagePropsType> 
 const mapStateToProps = (state: any) => {
 }
 
-export default connect(mapStateToProps, { setUsersProfileAC })(ProfilePage);
+ connect(mapStateToProps, { setUsersProfileAC })(ProfilePage);

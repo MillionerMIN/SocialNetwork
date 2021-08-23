@@ -1,9 +1,11 @@
 import { Dispatch } from "redux";
-import { usersAPI } from "../api/usersApi";
+import { profileAPI } from '../api/usersApi';
 
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 const SET_USERS_PROFILE = 'SET_USERS_PROFILE';
+const SET_STATUS = 'SET_STATUS';
+const UPDATE_STATUS = 'UPDATE_STATUS';
 
 export type PostType = {
    id: number
@@ -38,11 +40,14 @@ type PostsPageType = {
    newPostText: string
    posts: Array<PostType>
    profile: null | ProfileType
+   status: string
 }
 
 export type ActionsTypes = ReturnType<typeof addPostAC>
    | ReturnType<typeof updateNewPostTextAC>
    | ReturnType<typeof setUsersProfileAC>
+   | ReturnType<typeof setStatusAC>
+   | ReturnType<typeof updateStatusAC>
 
 
 const intilitionState: PostsPageType = {
@@ -53,6 +58,7 @@ const intilitionState: PostsPageType = {
       { id: 3, messages: 'What did the Dursleys care if Huse Quidditch', name: 'Anna', like: 20 }
    ],
    profile: null,
+   status: '---',
 }
 
 const profileReducer = (state = intilitionState, action: ActionsTypes): PostsPageType => {
@@ -73,6 +79,15 @@ const profileReducer = (state = intilitionState, action: ActionsTypes): PostsPag
          return {
             ...state, profile: action.profile
          }
+      case SET_STATUS:
+         return {
+            ...state, 
+            status: action.status
+         }
+      case UPDATE_STATUS:
+         return {
+            ...state, status: action.status
+         }
       default: {
          return state;
       }
@@ -82,16 +97,32 @@ const profileReducer = (state = intilitionState, action: ActionsTypes): PostsPag
 export const addPostAC = () => ({ type: ADD_POST } as const)
 export const updateNewPostTextAC = (newText: string) => ({ type: UPDATE_NEW_POST_TEXT, newText } as const)
 export const setUsersProfileAC = (profile: ProfileType | null) => ({ type: SET_USERS_PROFILE, profile } as const)
+export const setStatusAC = (status: string) => ({ type: SET_STATUS, status } as const)
+export const updateStatusAC = (status: string) => ({ type: UPDATE_STATUS, status } as const)
 
 //THUNK
 export const getProfileTC = (userId: number) => (dispatch: Dispatch) => {
-   if (!userId) {
-      userId = 2;
-   }
-   usersAPI.getProfile(userId)
-      .then(data => {
-         dispatch(setUsersProfileAC(data));
+   profileAPI.getProfile(userId)
+      .then(res => {
+         dispatch(setUsersProfileAC(res.data));
+         console.log(res.data);
       })
 }
 
+export const getStatusTC = (userId: number) => (dispatch: Dispatch) => {
+   profileAPI.getStatus(userId)
+      .then(res => {
+         dispatch(setStatusAC(res.data));
+         console.log(res.data);
+      })
+}
+
+export const updateStatusTC = (status: string) => (dispatch: Dispatch) => {
+   profileAPI.updateStatus(status)
+      .then(res => {
+         if (res.data.resultCode === 0) {
+            dispatch(updateStatusAC(status));
+         };
+      })
+}
 export default profileReducer;

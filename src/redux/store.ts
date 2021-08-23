@@ -156,8 +156,8 @@ export const store: StoreType = {
     },
 
     dispatch(action: any) {
-        this._state.postsPage = profileReducer(this._state.postsPage, action)
-        this._state.chatsPage = chatsReducer(this._state.chatsPage, action)
+        // this._state.postsPage = profileReducer(this._state.postsPage, action)
+        // this._state.chatsPage = chatsReducer(this._state.chatsPage, action)
         // this._state.sidebar = sidebarReducer(this._state.sidebar, action)
         this._callSubscriber()
     }
