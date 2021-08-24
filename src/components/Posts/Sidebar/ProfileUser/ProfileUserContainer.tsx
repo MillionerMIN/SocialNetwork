@@ -24,9 +24,7 @@ type MapDispatchToPropsType = {
 
 class ProfileUserContainer extends React.Component<RouteComponentProps<any> & ProfileUserPropsType & MapStateToPropsType & MapDispatchToPropsType> {
    componentDidMount() {
-
       let profileId = this.props.match.params.userId
-
       if (!profileId) {
          profileId = this.props.id
       }
@@ -34,7 +32,17 @@ class ProfileUserContainer extends React.Component<RouteComponentProps<any> & Pr
       this.props.getProfileTC(profileId)
       this.props.getStatusTC(profileId)
    }
+
+   componentDidUpdate(prevProps: any, prevState: any){
+      debugger
+      if(prevProps.status !== this.props.status){
+         this.setState({state: this.props.status})
+      }
+      console.log('componentDidUpdate');
+   }
    render() {
+      console.log('render');
+      
       return <ProfileUser {...this.props}
          profile={this.props.profile}
          status={this.props.status} 

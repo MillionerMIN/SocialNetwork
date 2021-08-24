@@ -12,22 +12,25 @@ type ProfileUserPropsType = {
 }
 
 const ProfileUser = (props: ProfileUserPropsType) => {
-  
-   const [editMode, setEditMode] = useState<boolean>(false);
-   const [newStatus, setNewStatus] = useState<string >('')
+
    const { profile, status, updateStatus } = props;
 
-   const activetEditMod =() => {
-      setEditMode( true )
+   const [editMode, setEditMode] = useState<boolean>(false);
+   const [newStatus, setNewStatus] = useState<string>(status)
+   
+
+   const  activetEditMod = () => {
+      setEditMode(true);
    }
 
    const diactivatEditMod = () => {
       setEditMode(false);
       updateStatus(newStatus);
-   }
 
-   const onChangeStatus = (e: React.ChangeEvent<HTMLInputElement>) => {
-      setNewStatus(e.currentTarget.value)
+   }
+   
+   let onChangeStatus = (e: React.ChangeEvent<HTMLInputElement>) => {
+      setNewStatus(e.currentTarget.value);
    }
 
    if (!profile) {
@@ -38,13 +41,13 @@ const ProfileUser = (props: ProfileUserPropsType) => {
       <div>
          <img className={s.photo} src={profile.photos.large !== null ? profile.photos.large : profilePhoto} alt="userPhoto" />
       </div>
-      {/* <div className={s.status}>{status}</div> */}
       <div className={s.title}>{props.profile?.fullName}</div>
       {!editMode &&
          <span onDoubleClick={activetEditMod} className={s.descr}>{status || '---'}</span>
       }
       {editMode &&
-         <input onChange={onChangeStatus} onBlur={diactivatEditMod} autoFocus className={s.descr} value={status} />
+         <input onChange={onChangeStatus} 
+         onBlur={diactivatEditMod} autoFocus className={s.descr} value={newStatus} />
       }
    </div>
 }
