@@ -34,7 +34,6 @@ class ProfileUserContainer extends React.Component<RouteComponentProps<any> & Pr
    }
 
    componentDidUpdate(prevProps: any, prevState: any){
-      debugger
       if(prevProps.status !== this.props.status){
          this.setState({state: this.props.status})
       }

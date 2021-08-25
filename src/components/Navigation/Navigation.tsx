@@ -13,10 +13,20 @@ import music from './item/icons/music.svg';
 import setting from './item/icons/setting.svg';
 import users from './item/icons/users.svg';
 import other from './item/icons/other.svg';
-import LoginContainer from '../Login/LoginContainer';
+import Account from '../Login/Account/Account';
+import { AuthType } from '../../redux/auth-reducer';
+import { NavLink } from 'react-router-dom';
 
-function Navigation() {
+type NavigationPropsType = {
+    // getAuthUserDataTC: (
+    //     id: null | number,
+    //     email: null | string,
+    //     login: null | string) => void
+    auth: AuthType
+}
 
+function Navigation({ ...props }: NavigationPropsType) {
+    const { email, login, isAuth } = props.auth
     return (
         <nav className={s.nav}>
 
@@ -32,7 +42,15 @@ function Navigation() {
                             <Item title={'setting'} link={'../../Setting/Setting.tsx'} icon={setting} />
                         </div>
                         <Search />
-                        <LoginContainer />
+                        <div className={s.loginBlock}>
+                            {isAuth ? <Account email={email} login={login} /> :
+                                <div className={s.loginBlock}>
+                                    <NavLink to="/login">
+                                        <h1>Login</h1>
+                                    </NavLink>
+                                </div>}
+                        </div>
+                        
                     </div>
                     <Item title={'other'} link={'../../Other/Other.tsx'} icon={other} />
                 </div>

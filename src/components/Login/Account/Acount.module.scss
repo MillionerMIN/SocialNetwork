@@ -8,26 +8,6 @@
     cursor: pointer;
   }
 
-  &:before {
-    content: "";
-    position: absolute;
-    width: 2px;
-    height: 80px;
-    left: 0;
-    top: -19px;
-    background: #f4f4f4;
-  }
-
-  &:after {
-    content: "";
-    position: absolute;
-    width: 2px;
-    height: 80px;
-    right: 0;
-    top: -19px;
-    background: #f4f4f4;
-  }
-
   .wrapper {
     padding-left: 15px;
     display: grid;

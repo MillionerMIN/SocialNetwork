@@ -2,13 +2,13 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 
 //import components
-import Navigation from '../Navigation/Navigation';
 import ChatsContainer from '../Chats/ChatsContainer';
 import PostsContainer from '../Posts/PostsContainer';
 import UsersContainer from '../Users/UsersContainer';
 import { Footer } from '../Footer/Footer';
 import ProfileUserContainer from '../Posts/Sidebar/ProfileUser/ProfileUserContainer';
 import LoginContainer from '../Login/LoginContainer';
+import NavigationContainer from '../Navigation/NavigationContainer';
 
 // import News from './components/News/News';
 // import Setting from './components/Setting/Setting';
@@ -17,7 +17,7 @@ import LoginContainer from '../Login/LoginContainer';
 const App = () => {
     return (
         <div>
-            <Navigation />
+            <NavigationContainer />
             <Route path={'/profile/:userId?'} render={() => <ProfileUserContainer />} />
             <Route path={'/posts'} render={() => <PostsContainer />} />
             <Route path={'/chats'} render={() => <ChatsContainer />} />
