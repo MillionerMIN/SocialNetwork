@@ -4,6 +4,8 @@ import { AuthType } from "../../redux/auth-reducer";
 import Account from "./Account/Account";
 import s from './Login.module.scss';
 import c from '../Container.module.scss'
+import { Input } from "../common/FormControls/FormControls";
+import { required } from '../../utils/validation/validation';
 
 type LoginPropsType = {
    auth: AuthType
@@ -34,13 +36,19 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
    return (
       <form onSubmit={props.handleSubmit}>
          <div>
-            <Field name="login" placeholder="Login" component="input" />
+            <Field name="login"
+               placeholder="Login"
+               component={Input}
+               validate={[required]} />
          </div>
          <div>
-            <Field name="password" placeholder="Password" component="input" />
+            <Field name="password"
+               placeholder="Password"
+               component={Input}
+               validate={[required]} />
          </div>
          <div>
-            <Field name="rememberMe" component="input" type="checkbox" /> remember me
+            <Field name="rememberMe" component={Input} type="checkbox" /> remember me
          </div>
          <button>LOGIN</button>
       </form>

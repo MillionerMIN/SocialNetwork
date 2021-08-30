@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { AppStateType } from '../../redux/redux-store';
 import { follow, unFollow, setCurrentPage, UsersPageType, setFollowingInProgress, getUsersTC } from '../../redux/users-reducer';
 import { Users } from './Users';
-import { Spinner } from '../Spinner/Spinner';
+import { Spinner } from '../common/Spinner/Spinner';
 import { withAuthRedirect } from '../../hoc/WithAuthRedirect';
 import { withRouter } from 'react-router';
 import { compose } from 'redux';

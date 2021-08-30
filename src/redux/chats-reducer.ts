@@ -1,3 +1,5 @@
+
+
 const SEND_MESSAGE = 'SEND-MESSAGE';
 
 export type ChatMessageType = {
@@ -38,16 +40,17 @@ const intilitionState: ChatsPageType = {
 const chatsReducer = (state = intilitionState, action: ActionsTypes): ChatsPageType => {
    switch (action.type) {
       case SEND_MESSAGE:
-         let body = action.message
          return {
             ...state,
-            chats: [...state.chats, { id: 6, message: body }],
+            chats: [...state.chats, { id: 6, message: action.message }],
+
          }
+         
       default:
          return state
    }
 }
 
-export const sendMessageAC = (message: string) => ({ type: SEND_MESSAGE, message } as const)
+export const sendMessageAC = (message: string) => ({ type: SEND_MESSAGE, message} as const)
 
 export default chatsReducer;

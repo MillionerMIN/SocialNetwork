@@ -7,6 +7,8 @@ import c from '../Container.module.scss';
 import s from './Chats.module.css';
 import { Field, InjectedFormProps, reduxForm } from 'redux-form';
 import { ChatMessageType } from '../../redux/chats-reducer';
+import { maxLengthCreater, required } from '../../utils/validation/validation';
+import { Textarea } from '../common/FormControls/FormControls';
 
 type ChatsPropsType = {
     state: ChatsPageType
@@ -45,10 +47,14 @@ function Chats(props: ChatsPropsType) {
     );
 }
 
+const maxLength50 = maxLengthCreater(50)
+
 const AddNewMessages: React.FC<InjectedFormProps<ChatMessageType>> = (props) => {
     return (
         <form className={s.writeMessages} onSubmit={props.handleSubmit}>
-            <Field component='textarea' name='message'
+            <Field component={Textarea}
+                name='message'
+                validate={[required, maxLength50]}
                 placeholder='Enter your message'>
             </Field>
             <button>Send</button>

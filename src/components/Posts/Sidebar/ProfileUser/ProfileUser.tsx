@@ -3,7 +3,7 @@ import s from './ProfileUser.module.scss';
 import profileBg from '../../../../img/profile/ProfileImg.jpg'
 import profilePhoto from '../../../../img/icons/user.png'
 import { ProfileType } from "../../../../redux/profile-reducer";
-import { Spinner } from "../../../Spinner/Spinner";
+import { Spinner } from "../../../common/Spinner/Spinner";
 
 type ProfileUserPropsType = {
    profile: null | ProfileType
