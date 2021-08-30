@@ -1,4 +1,4 @@
-import { sendMessageAC, updateNewMessageAC } from '../../redux/chats-reducer';
+import { sendMessageAC } from '../../redux/chats-reducer';
 import Chats from './Chats';
 import { connect } from 'react-redux';
 import { AppStateType } from '../../redux/redux-store';
@@ -22,7 +22,7 @@ const mapStateToProps = (state: AppStateType) => {
 }
 
 export default compose<React.ComponentType>(
-    connect(mapStateToProps, { sendMessageAC, updateNewMessageAC }),
+    connect(mapStateToProps, { sendMessageAC, }),
     withRouter,
     withAuthRedirect
 )(ChatsContainer);

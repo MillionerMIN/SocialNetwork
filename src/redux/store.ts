@@ -1,5 +1,3 @@
-import chatsReducer from "./chats-reducer"
-import profileReducer from "./profile-reducer"
 // import sidebarReducer from "./sidebar-reducer"
 import { ProfileType } from './profile-reducer';
 
@@ -35,14 +33,12 @@ export type UsersType = {
 }
 
 export type PostsPageType = {
-    newPostText: string
     posts: Array<PostType>
     profile: null | ProfileType
 }
 export type ChatsPageType = {
     chats: Array<ChatMessageType>
     dialog: Array<DialogType>
-    newMessageBody: string
 }
 
 export type UsersPageType = {
@@ -69,7 +65,6 @@ export type StoreType = {
 export const store: StoreType = {
     _state: {
         postsPage: {
-            newPostText: '',
             posts: [
                 { id: 1, messages: 'care if Harry lost his place on the House Quidditch', name: 'Petr', like: 10 },
                 { id: 2, messages: 'What did the Dursleys care if Harry lost his place on ', name: 'Vova', like: 9 },
@@ -78,8 +73,6 @@ export const store: StoreType = {
             profile: null,
         },
         chatsPage: {
-            newMessageBody: '',
-
             chats: [
                 { id: 1, message: 'Hi' },
                 { id: 2, message: 'How are you?' },
@@ -118,8 +111,8 @@ export const store: StoreType = {
                         small: 'string',
                         large: 'string'
                     },
-                        //'https://99px.ru/sstorage/56/2018/02/image_560602180105417871116.png',
-                        followed: true,
+                    //'https://99px.ru/sstorage/56/2018/02/image_560602180105417871116.png',
+                    followed: true,
                     name: 'Vladimir',
                     location: {
                         country: 'Russia',
@@ -132,8 +125,8 @@ export const store: StoreType = {
                         small: 'string',
                         large: 'string'
                     },
-                        //'http://pm1.narvii.com/7157/52f82eabd0623d44c29d0dffdd446c6bae242576r1-259-267v2_00.jpg',
-                        followed: true,
+                    //'http://pm1.narvii.com/7157/52f82eabd0623d44c29d0dffdd446c6bae242576r1-259-267v2_00.jpg',
+                    followed: true,
                     name: 'Anna',
                     location: {
                         country: 'Belarus',

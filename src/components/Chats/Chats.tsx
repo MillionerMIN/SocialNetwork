@@ -1,15 +1,17 @@
-import React, { ChangeEvent } from 'react';
+import React from 'react';
 import { ChatsPageType } from '../../redux/store';
 import { ChatMessage } from './ChatMessage/ChatMessage';
 import { DialogsItem } from "./DialogsItem/DialogItem";
 //import css
 import c from '../Container.module.scss';
 import s from './Chats.module.css';
+import { Field, InjectedFormProps, reduxForm } from 'redux-form';
+import { ChatMessageType } from '../../redux/chats-reducer';
 
 type ChatsPropsType = {
     state: ChatsPageType
     isAuth: boolean
-    onSendNewMessageClick: () => void
+    sendMessageAC: (message: string) => void
     onNewMessageChange: (body: any) => void
 }
 
@@ -17,15 +19,9 @@ function Chats(props: ChatsPropsType) {
 
     let dialogElements = props.state.dialog.map(c => <DialogsItem key={c.id} name={c.name} id={c.id} text={c.text} />)
     let chatMessageElement = props.state.chats.map(m => <ChatMessage key={m.id} id={m.id} message={m.message} />)
-    let newMessageBody = props.state.newMessageBody
 
-    let onSendNewMessageClick = () => {
-        props.onSendNewMessageClick();
-    }
-
-    let onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        let body = e.currentTarget.value;
-        props.onNewMessageChange(body);
+    let addNewMessage = (values: any) => {
+        props.sendMessageAC(values.message)
     }
 
     return (
@@ -42,16 +38,23 @@ function Chats(props: ChatsPropsType) {
                     <div className={s.messages}>
                         {chatMessageElement}
                     </div>
-                    <div className={s.writeMessages}>
-                        <textarea value={newMessageBody}
-                            onChange={onNewMessageChange}
-                            placeholder='Enter your message'></textarea>
-                        <button onClick={onSendNewMessageClick}>Send</button>
-                    </div>
+                    <AddNewMessagesRedux onSubmit={addNewMessage} />
                 </div>
             </div>
         </div>
     );
 }
 
+const AddNewMessages: React.FC<InjectedFormProps<ChatMessageType>> = (props) => {
+    return (
+        <form className={s.writeMessages} onSubmit={props.handleSubmit}>
+            <Field component='textarea' name='message'
+                placeholder='Enter your message'>
+            </Field>
+            <button>Send</button>
+        </form>
+    )
+}
+
+const AddNewMessagesRedux = reduxForm<ChatMessageType>({ form: 'dialogAddMessageForm' })(AddNewMessages)
 export default Chats;

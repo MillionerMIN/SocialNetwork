@@ -1,7 +1,6 @@
-const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY';
 const SEND_MESSAGE = 'SEND-MESSAGE';
 
-type ChatMessageType = {
+export type ChatMessageType = {
    id: number
    message: string
 }
@@ -15,14 +14,11 @@ type DialogType = {
 export type ChatsPageType = {
    chats: Array<ChatMessageType>
    dialog: Array<DialogType>
-   newMessageBody: string
 }
 
-export type ActionsTypes = ReturnType<typeof sendMessageAC> | ReturnType<typeof updateNewMessageAC>
+export type ActionsTypes = ReturnType<typeof sendMessageAC>
 
 const intilitionState: ChatsPageType = {
-   newMessageBody: '',
-
    chats: [
       { id: 1, message: 'Hi' },
       { id: 2, message: 'How are you?' },
@@ -41,22 +37,17 @@ const intilitionState: ChatsPageType = {
 
 const chatsReducer = (state = intilitionState, action: ActionsTypes): ChatsPageType => {
    switch (action.type) {
-      case UPDATE_NEW_MESSAGE_BODY: 
-         return  { ...state,
-            newMessageBody: action.message
-         }
       case SEND_MESSAGE:
-         let body = state.newMessageBody
-         return { ...state ,
+         let body = action.message
+         return {
+            ...state,
             chats: [...state.chats, { id: 6, message: body }],
-            newMessageBody: ''
          }
       default:
          return state
    }
 }
 
-export const sendMessageAC = () => ({ type: SEND_MESSAGE } as const)
-export const updateNewMessageAC = (body: string) => ({ type: UPDATE_NEW_MESSAGE_BODY, message: body } as const)
+export const sendMessageAC = (message: string) => ({ type: SEND_MESSAGE, message } as const)
 
 export default chatsReducer;
