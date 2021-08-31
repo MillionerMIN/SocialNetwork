@@ -1,5 +1,6 @@
 import { Dispatch } from "redux";
 import { profileAPI } from '../api/usersApi';
+import { AppActionType, AppThunkType } from "./redux-store";
 
 const ADD_POST = 'ADD-POST';
 const SET_USERS_PROFILE = 'SET_USERS_PROFILE';
@@ -42,7 +43,7 @@ type PostsPageType = {
    status: string
 }
 
-export type ActionsTypes = ReturnType<typeof addPostAC>
+export type ProfileActionsTypes = ReturnType<typeof addPostAC>
    | ReturnType<typeof setUsersProfileAC>
    | ReturnType<typeof setStatusAC>
    | ReturnType<typeof updateStatusAC>
@@ -59,7 +60,7 @@ const intilitionState: PostsPageType = {
    status: '---',
 }
 
-const profileReducer = (state = intilitionState, action: ActionsTypes): PostsPageType => {
+const profileReducer = (state = intilitionState, action: AppActionType): PostsPageType => {
 
    switch (action.type) {
       case ADD_POST:
@@ -98,7 +99,7 @@ export const setStatusAC = (status: string) => ({ type: SET_STATUS, status } as 
 export const updateStatusAC = (status: string) => ({ type: UPDATE_STATUS, status } as const)
 
 //THUNK
-export const getProfileTC = (userId: number) => (dispatch: Dispatch) => {
+export const getProfileTC = (userId: number): AppThunkType => (dispatch) => {
    profileAPI.getProfile(userId)
       .then(res => {
          dispatch(setUsersProfileAC(res.data));
@@ -106,7 +107,7 @@ export const getProfileTC = (userId: number) => (dispatch: Dispatch) => {
       })
 }
 
-export const getStatusTC = (userId: number) => (dispatch: Dispatch) => {
+export const getStatusTC = (userId: number): AppThunkType => (dispatch) => {
    profileAPI.getStatus(userId)
       .then(res => {
          dispatch(setStatusAC(res.data));
@@ -114,7 +115,7 @@ export const getStatusTC = (userId: number) => (dispatch: Dispatch) => {
       })
 }
 
-export const updateStatusTC = (status: string) => (dispatch: Dispatch) => {
+export const updateStatusTC = (status: string): AppThunkType => (dispatch) => {
    profileAPI.updateStatus(status)
       .then(res => {
          if (res.data.resultCode === 0) {

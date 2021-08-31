@@ -1,10 +1,10 @@
 import { applyMiddleware, combineReducers, createStore } from "redux";
-import chatsReducer from "./chats-reducer";
-import profileReducer from "./profile-reducer";
+import chatsReducer, { ChatActionsTypes } from "./chats-reducer";
+import profileReducer, { ProfileActionsTypes } from "./profile-reducer";
 import usersReducer from "./users-reducer";
 // import sidebarReducer from "./sidebar-reducer";
-import { authReducer } from './auth-reducer';
-import thunk from "redux-thunk";
+import { authReducer, AuthActionsTypes } from './auth-reducer';
+import thunk, { ThunkAction } from "redux-thunk";
 import { reducer as formReducer } from 'redux-form'
 
 
@@ -22,6 +22,13 @@ const store = createStore(state, applyMiddleware(thunk));
 
 export type AppStateType = ReturnType<typeof state>
 export type AppDispatchType = typeof store.dispatch;
+export type AppActionType = AuthActionsTypes | ProfileActionsTypes | ChatActionsTypes
+export type AppThunkType<ReturnType = void> = ThunkAction<
+   ReturnType,
+   AppStateType,
+   unknown,
+   AppActionType
+>
 
 export default store;
 declare const window: Window &

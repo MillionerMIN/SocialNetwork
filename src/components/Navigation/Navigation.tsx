@@ -18,14 +18,11 @@ import { AuthType } from '../../redux/auth-reducer';
 import { NavLink } from 'react-router-dom';
 
 type NavigationPropsType = {
-    // getAuthUserDataTC: (
-    //     id: null | number,
-    //     email: null | string,
-    //     login: null | string) => void
+    loginoutTC: () => void
     auth: AuthType
 }
 
-function Navigation({ ...props }: NavigationPropsType) {
+function Navigation({ loginoutTC, ...props }: NavigationPropsType) {
     const { email, login, isAuth } = props.auth
     return (
         <nav className={s.nav}>
@@ -43,7 +40,10 @@ function Navigation({ ...props }: NavigationPropsType) {
                         </div>
                         <Search />
                         <div className={s.loginBlock}>
-                            {isAuth ? <Account email={email} login={login} /> :
+                            {isAuth ? <div>
+                                <Account email={email} login={login} />
+                                <button onClick={loginoutTC}>Log out</button>
+                                </div> :
                                 <div className={s.loginBlock}>
                                     <NavLink to="/login">
                                         <h1>Login</h1>
