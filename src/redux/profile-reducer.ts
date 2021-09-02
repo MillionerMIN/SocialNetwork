@@ -1,4 +1,3 @@
-import { Dispatch } from "redux";
 import { profileAPI } from '../api/usersApi';
 import { AppActionType, AppThunkType } from "./redux-store";
 

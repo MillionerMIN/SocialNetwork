@@ -43,14 +43,14 @@ function Navigation({ loginoutTC, ...props }: NavigationPropsType) {
                             {isAuth ? <div>
                                 <Account email={email} login={login} />
                                 <button onClick={loginoutTC}>Log out</button>
-                                </div> :
+                            </div> :
                                 <div className={s.loginBlock}>
                                     <NavLink to="/login">
                                         <h1>Login</h1>
                                     </NavLink>
                                 </div>}
                         </div>
-                        
+
                     </div>
                     <Item title={'other'} link={'../../Other/Other.tsx'} icon={other} />
                 </div>

@@ -1,0 +1,2 @@
+.filter{position:relative;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;height:80px;font-size:12px;font-weight:bold;text-transform:uppercase;color:#181818;background:#E9F0F8}.filter:before{position:absolute;content:'';width:332px;height:2px;left:0;background:#E7E7E7}.filter:after{position:absolute;content:'';width:332px;height:2px;right:0;background:#E7E7E7}.filter span{color:#0275B1}
+/*# sourceMappingURL=Filter.module.min.css.map */

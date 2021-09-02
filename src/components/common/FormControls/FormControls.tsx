@@ -13,12 +13,16 @@ const FormControls = (props: any) => {
 }
 
 export const Textarea = (props: any) => {
-   const { input , ...restProps} = props;
+   const { input, ...restProps } = props;
    return <FormControls {...props}><textarea {...input} {...restProps} /></FormControls>
 }
 
 export const Input = (props: any) => {
    const { input, meta, ...restProps } = props;
    return <FormControls {...props}><input {...input} {...restProps} /></FormControls>
+}
+
+export const FormError = (props: any) => {
+   return <FormControls {...props}><div {...props}>{props.error}</div></FormControls>
 }
 

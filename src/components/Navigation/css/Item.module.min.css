@@ -1,0 +1,2 @@
+.item{width:90px;height:80px}.item a{text-decoration:none;color:#181818}.item a.activeLink h3{-webkit-transform:scale(1.05, 1.05);transform:scale(1.05, 1.05);color:#0275b1}.item img{margin:0 auto;padding-top:18px;display:block;max-width:24px;max-height:24px}.item h3{padding-top:10px;text-align:center;font-size:12px;text-transform:uppercase;color:#181818}.item h3:hover{-webkit-transform:scale(1.05, 1.05);transform:scale(1.05, 1.05);color:#0275b1}
+/*# sourceMappingURL=Item.module.min.css.map */

@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,KAAK,AAAC,CACJ,OAAO,CAAE,IAAI,CACb,qBAAqB,CAAE,WAAW,CAClC,eAAe,CAAE,aAAa,CAC9B,UAAU,CAAE,IAAI,CAChB,UAAU,CAAE,IAAI,CAChB,SAAS,CAAE,GAAG,CACd,UAAU,CAAE,MAAM,CAClB,gBAAgB,CAAE,OAAO,CAM1B,AAdD,AASE,KATG,CASH,QAAQ,AAAC,CACP,OAAO,CAAE,IAAI,CACb,kBAAkB,CAAE,eAAe,CACnC,UAAU,CAAE,OAAO,CACpB",
+    "sources": [
+        "../Posts/Posts.module.scss"
+    ],
+    "names": [],
+    "file": "Posts.module.min.css"
+}

@@ -1,3 +1,4 @@
+import { stopSubmit } from "redux-form";
 import { authAPI } from "../api/usersApi";
 import { AppActionType, AppThunkType } from "./redux-store";
 
@@ -54,6 +55,11 @@ export const loginTC = (email: string, password: string, rememberMe: boolean): A
       .then(res => {
          if (res.data.resultCode === 0) {
             dispatch(getAuthUserDataTC());
+         } else {
+            let message = res.data.messages.length > 0 ? res.data.messages[0] : 'some error';
+            //@ts-ignore
+            // export function stopSubmit(form: string, errors?: Object): Action;
+            dispatch(stopSubmit('login', { _error: message}))
          }
       })
 }
