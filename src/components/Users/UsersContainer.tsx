@@ -7,6 +7,7 @@ import { Spinner } from '../common/Spinner/Spinner';
 import { withAuthRedirect } from '../../hoc/WithAuthRedirect';
 import { withRouter } from 'react-router';
 import { compose } from 'redux';
+import { getUsers, getPageSize, getTotalUsersCount, getCurrentPage, getIsFatching, getFollowingInProgress } from '../../redux/users-selects';
 
 type UsersPropsType = {
    state: UsersPageType
@@ -61,12 +62,12 @@ class UsersContainer extends React.Component<UsersPropsType> {
 
 const mapStateToProps = (state: AppStateType): MSTP => {
    return {
-      state: state.usersPage,
-      pageSize: state.usersPage.pageSize,
-      totalUsersCount: state.usersPage.totalUsersCount,
-      currentPage: state.usersPage.currentPage,
-      isFatching: state.usersPage.isFatching,
-      followingInProgress: state.usersPage.followingInProgress
+      state: getUsers(state),
+      pageSize: getPageSize(state),
+      totalUsersCount: getTotalUsersCount(state),
+      currentPage: getCurrentPage(state),
+      isFatching: getIsFatching(state),
+      followingInProgress: getFollowingInProgress(state)
    }
 }
 

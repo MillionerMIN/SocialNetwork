@@ -99,7 +99,6 @@ const usersReducer = (state: UsersPageType = intilitionState, action: ActionsTyp
       default:
          return state;
    }
-
 }
 
 export const followAC = (userId: number) => ({ type: FOLLOW, userId } as const)
@@ -111,9 +110,10 @@ export const setIsFetching = (isFatching: boolean) => ({ type: SET_IS_FETCHING, 
 export const setFollowingInProgress = (isFatching: boolean, userId: number) => ({ type: SET_IN_FOLLOWING, isFatching, userId } as const)
 
 //THUNK
-export const getUsersTC = (currentPage: number, pageSize: number) => (dispatch: Dispatch) => {
+export const getUsersTC = (page: number, pageSize: number) => (dispatch: Dispatch) => {
    dispatch(setIsFetching(true));
-   usersAPI.getUsers(currentPage, pageSize)
+   dispatch(setCurrentPage(page));
+   usersAPI.getUsers(page, pageSize)
       .then(res => {
          dispatch(setIsFetching(false))
          dispatch(setUsers(res.data.items))

@@ -15,7 +15,7 @@ type PostsPropsType = {
 
 function Posts(props: PostsPropsType) {
 
-    let postElement = props.posts.map(p => <MyPost key={p.id} id={p.id} name={p.name} like={p.like} messages={p.messages} />)
+    let postElement = props.posts.map(p => <MyPost key={p.id} id={p.id} avatar={p.avatar} name={p.name} like={p.like} messages={p.messages} />)
     return (
         <div className={c.container}>
             <div className={s.post}>

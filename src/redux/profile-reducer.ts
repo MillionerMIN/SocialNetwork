@@ -9,6 +9,7 @@ const UPDATE_STATUS = 'UPDATE_STATUS';
 export type PostType = {
    id: number
    messages: string
+   avatar: string
    name: string
    like: number
 }
@@ -51,9 +52,21 @@ export type ProfileActionsTypes = ReturnType<typeof addPostAC>
 const intilitionState: PostsPageType = {
    newPostText: '',
    posts: [
-      { id: 1, messages: 'care if Harry lost his place on the House Quidditch', name: 'Petr', like: 10 },
-      { id: 2, messages: 'What did the Dursleys care if Harry lost his place on ', name: 'Vova', like: 9 },
-      { id: 3, messages: 'What did the Dursleys care if Huse Quidditch', name: 'Anna', like: 20 }
+      {
+         id: 1, messages: 'care if Harry lost his place on the House Quidditch',
+         avatar: 'https://avatars.mds.yandex.net/get-zen_doc/1888987/pub_5d2c7ff331878200ad93db8d_5d2c8196c31e4900aebf535d/scale_1200',
+         name: 'Petr', like: 10
+      },
+      {
+         id: 2, messages: 'What did the Dursleys care if Harry lost his place on ',
+         avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsilMFO40hHXJ8wnaDFPIfauqkGrWB5VVoVA&usqp=CAU',
+         name: 'Vova', like: 9
+      },
+      {
+         id: 3, messages: 'What did the Dursleys care if Huse Quidditch',
+         avatar: 'https://cdna.artstation.com/p/assets/images/images/022/619/308/large/dmitry-gaborak-aka-neverwintered-green-2-3-sm-ava.jpg?1576091791',
+         name: 'Anna', like: 20
+      }
    ],
    profile: null,
    status: '---',
@@ -69,6 +82,7 @@ const profileReducer = (state = intilitionState, action: AppActionType): PostsPa
             {
                id: new Date().getTime(),
                messages: action.newPostText,
+               avatar: 'https://i.pinimg.com/474x/25/73/2b/25732be3be38ec7a4e8a74b4d70cb2ad.jpg',
                name: '1',
                like: 0
             }],

@@ -14,7 +14,7 @@ type PostContainerType = {
 
 type MSTPType = {
     posts: PostType[]
-   
+
 }
 
 export class PostContainer extends Component<PostContainerType>{

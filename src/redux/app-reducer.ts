@@ -9,7 +9,6 @@ export type AppActionsTypes = ReturnType<typeof initializeAppAC>
 
 const intilitionState: AppType = {
    initialized: false
-
 }
 
 export const appReducer = (state = intilitionState, action: AppActionsTypes): AppType => {
@@ -27,17 +26,17 @@ export const appReducer = (state = intilitionState, action: AppActionsTypes): Ap
    }
 }
 
-export const initializeAppAC = () => ({ type: 'INITIALIZED_SUCCSES'} as const)
+export const initializeAppAC = () => ({ type: 'INITIALIZED_SUCCSES' } as const)
 
 //ThUNK
 export const initializeApp = (): AppThunkType => (dispatch) => {
- let promise = dispatch(getAuthUserDataTC())
+   let promise = dispatch(getAuthUserDataTC())
 
- Promise.all([promise])
- .then(()=> {
-    dispatch(initializeAppAC())
- })
-     
+   Promise.all([promise])
+      .then(() => {
+         dispatch(initializeAppAC())
+      })
+
 }
 
 

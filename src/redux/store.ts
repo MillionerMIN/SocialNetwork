@@ -4,6 +4,7 @@ import { ProfileType } from './profile-reducer';
 export type PostType = {
     id: number
     messages: string
+    avatar: string
     name: string
     like: number
 }
@@ -66,9 +67,21 @@ export const store: StoreType = {
     _state: {
         postsPage: {
             posts: [
-                { id: 1, messages: 'care if Harry lost his place on the House Quidditch', name: 'Petr', like: 10 },
-                { id: 2, messages: 'What did the Dursleys care if Harry lost his place on ', name: 'Vova', like: 9 },
-                { id: 3, messages: 'What did the Dursleys care if Huse Quidditch', name: 'Anna', like: 20 }
+                {
+                    id: 1, messages: 'care if Harry lost his place on the House Quidditch',
+                    avatar: 'https://avatars.mds.yandex.net/get-zen_doc/1888987/pub_5d2c7ff331878200ad93db8d_5d2c8196c31e4900aebf535d/scale_1200',
+                    name: 'Petr', like: 10
+                },
+                {
+                    id: 2, messages: 'What did the Dursleys care if Harry lost his place on ',
+                    avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsilMFO40hHXJ8wnaDFPIfauqkGrWB5VVoVA&usqp=CAU',
+                    name: 'Vova', like: 9
+                },
+                {
+                    id: 3, messages: 'What did the Dursleys care if Huse Quidditch',
+                    avatar: 'https://cdna.artstation.com/p/assets/images/images/022/619/308/large/dmitry-gaborak-aka-neverwintered-green-2-3-sm-ava.jpg?1576091791',
+                    name: 'Anna', like: 20
+                }
             ],
             profile: null,
         },

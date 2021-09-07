@@ -24,8 +24,8 @@ const store = createStore(state, applyMiddleware(thunk));
 
 export type AppStateType = ReturnType<typeof state>
 export type AppDispatchType = typeof store.dispatch;
-export type AppActionType = AuthActionsTypes | ProfileActionsTypes | ChatActionsTypes 
-| AppActionsTypes
+export type AppActionType = AuthActionsTypes | ProfileActionsTypes | ChatActionsTypes
+   | AppActionsTypes
 export type AppThunkType<ReturnType = void> = ThunkAction<
    ReturnType,
    AppStateType,
