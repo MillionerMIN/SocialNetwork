@@ -1,11 +1,6 @@
 import { profileAPI } from '../api/usersApi';
 import { AppActionType, AppThunkType } from "./redux-store";
 
-const ADD_POST = 'ADD-POST';
-const SET_USERS_PROFILE = 'SET_USERS_PROFILE';
-const SET_STATUS = 'SET_STATUS';
-const UPDATE_STATUS = 'UPDATE_STATUS';
-
 export type PostType = {
    id: number
    messages: string
@@ -36,8 +31,8 @@ export type ProfileType = {
    }
 }
 
-type PostsPageType = {
-   newPostText: string
+export type PostsPageType = {
+   newPostText?: string
    posts: Array<PostType>
    profile: null | ProfileType
    status: string
@@ -47,6 +42,7 @@ export type ProfileActionsTypes = ReturnType<typeof addPostAC>
    | ReturnType<typeof setUsersProfileAC>
    | ReturnType<typeof setStatusAC>
    | ReturnType<typeof updateStatusAC>
+   | ReturnType<typeof removePostAC>
 
 
 const intilitionState: PostsPageType = {
@@ -75,7 +71,7 @@ const intilitionState: PostsPageType = {
 const profileReducer = (state = intilitionState, action: AppActionType): PostsPageType => {
 
    switch (action.type) {
-      case ADD_POST:
+      case 'ADD-POST':
          return {
             ...state,
             posts: [...state.posts,
@@ -87,16 +83,18 @@ const profileReducer = (state = intilitionState, action: AppActionType): PostsPa
                like: 0
             }],
          }
-      case SET_USERS_PROFILE:
+      case 'REMOVE-POST': 
+         return { ...state, posts: state.posts.filter(p=> p.id !== action.postId) }
+      case 'SET_USERS_PROFILE':
          return {
             ...state, profile: action.profile
          }
-      case SET_STATUS:
+      case 'SET_STATUS':
          return {
             ...state,
             status: action.status
          }
-      case UPDATE_STATUS:
+      case 'UPDATE_STATUS':
          return {
             ...state, status: action.status
          }
@@ -106,10 +104,11 @@ const profileReducer = (state = intilitionState, action: AppActionType): PostsPa
    }
 }
 
-export const addPostAC = (newPostText: string) => ({ type: ADD_POST, newPostText } as const)
-export const setUsersProfileAC = (profile: ProfileType | null) => ({ type: SET_USERS_PROFILE, profile } as const)
-export const setStatusAC = (status: string) => ({ type: SET_STATUS, status } as const)
-export const updateStatusAC = (status: string) => ({ type: UPDATE_STATUS, status } as const)
+export const addPostAC = (newPostText: string) => ({ type: 'ADD-POST', newPostText } as const)
+export const removePostAC = (postId: number) => ({ type: 'REMOVE-POST', postId} as const)
+export const setUsersProfileAC = (profile: ProfileType | null) => ({ type: 'SET_USERS_PROFILE', profile } as const)
+export const setStatusAC = (status: string) => ({ type: 'SET_STATUS', status } as const)
+export const updateStatusAC = (status: string) => ({ type: 'UPDATE_STATUS', status } as const)
 
 //THUNK
 export const getProfileTC = (userId: number): AppThunkType => (dispatch) => {
