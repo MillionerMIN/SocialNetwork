@@ -2,7 +2,7 @@ import React from 'react';
 import s from './NewPost.module.scss'
 import { ReactComponent as ReactSend } from './icons/send.svg'
 import { Field, InjectedFormProps, reduxForm } from 'redux-form';
-import { maxLengthCreater, required } from '../../../utils/validation/validation';
+import { maxLengthCreate, required } from '../../../utils/validation/validation';
 import { Textarea } from '../../common/FormControls/FormControls';
 
 type NewPostPropsType = {
@@ -23,7 +23,7 @@ export function NewPost(props: NewPostPropsType) {
     </div>
 }
 
-const maxLength10 = maxLengthCreater(10);
+const maxLength10 = maxLengthCreate(10);
 
 const NewPostMess: React.FC<InjectedFormProps<NewPostPropsType>> = (props) => {
     return (

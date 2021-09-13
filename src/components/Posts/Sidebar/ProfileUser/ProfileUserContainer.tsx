@@ -32,7 +32,7 @@ class ProfileUserContainer extends React.Component<RouteComponentProps<any> & Pr
       this.props.getProfileTC(profileId)
       this.props.getStatusTC(profileId)
    }
-
+ 
    componentDidUpdate(prevProps: any, prevState: any){
       if(prevProps.status !== this.props.status){
          this.setState({state: this.props.status})

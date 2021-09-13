@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import s from './ProfileUser.module.scss';
 import profileBg from '../../../../img/profile/ProfileImg.jpg'
 import profilePhoto from '../../../../img/icons/user.png'
@@ -16,19 +16,25 @@ const ProfileUser = (props: ProfileUserPropsType) => {
    const { profile, status, updateStatus } = props;
 
    const [editMode, setEditMode] = useState<boolean>(false);
-   const [newStatus, setNewStatus] = useState<string>(status)
-   
+   const [newStatus, setNewStatus] = useState<string>(status);
 
-   const  activetEditMod = () => {
+   useEffect(() => {
+      console.log('useEffect status');
+      
+      setNewStatus(status)
+   }, [status])
+
+
+   const activatedEditMod = () => {
       setEditMode(true);
    }
 
-   const diactivatEditMod = () => {
+   const diactivedEditModEditMod = () => {
       setEditMode(false);
       updateStatus(newStatus);
 
    }
-   
+
    let onChangeStatus = (e: React.ChangeEvent<HTMLInputElement>) => {
       setNewStatus(e.currentTarget.value);
    }
@@ -43,11 +49,11 @@ const ProfileUser = (props: ProfileUserPropsType) => {
       </div>
       <div className={s.title}>{props.profile?.fullName}</div>
       {!editMode &&
-         <span onDoubleClick={activetEditMod} className={s.descr}>{status || '---'}</span>
+         <span onDoubleClick={activatedEditMod} className={s.descr}>{status || '---'}</span>
       }
       {editMode &&
-         <input onChange={onChangeStatus} 
-         onBlur={diactivatEditMod} autoFocus className={s.descr} value={newStatus} />
+         <input onChange={onChangeStatus}
+            onBlur={diactivedEditModEditMod} autoFocus className={s.descr} value={newStatus} />
       }
    </div>
 }

@@ -1,12 +1,12 @@
 import React from "react";
-import { UsersPageType } from '../../redux/users-reducer';
+import { UsersType } from '../../redux/users-reducer';
 import photoUser from '../../img/icons/user.png';
 import s from './Users.module.scss';
 import c from '../Container.module.scss'
 import { NavLink } from 'react-router-dom';
 
 type UsersPropsType = {
-   users: UsersPageType
+   users: UsersType[]
    pageSize: number
    totalUsersCount: number
    currentPage: number
@@ -40,7 +40,7 @@ function Users({
                   onClick={() => onPageChanget(p)}>{p}</button>
                )}
             </div>
-            {users.users.map(u => <div key={u.id} className={s.wrapper}>
+            {users.map(u => <div key={u.id} className={s.wrapper}>
                <div className={s.avatar}>
                   <NavLink to={'/profile/' + u.id}>
                      <img src={u.photos.small !== null ? u.photos.small : photoUser} alt="avatar" />

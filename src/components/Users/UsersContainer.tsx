@@ -1,16 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { AppStateType } from '../../redux/redux-store';
-import { follow, unFollow, setCurrentPage, UsersPageType, setFollowingInProgress, getUsersTC } from '../../redux/users-reducer';
+import { follow, unFollow, setCurrentPage, setFollowingInProgress, getUsersTC, UsersType } from '../../redux/users-reducer';
 import { Users } from './Users';
 import { Spinner } from '../common/Spinner/Spinner';
 import { withAuthRedirect } from '../../hoc/WithAuthRedirect';
 import { withRouter } from 'react-router';
 import { compose } from 'redux';
-import { getUsers, getPageSize, getTotalUsersCount, getCurrentPage, getIsFatching, getFollowingInProgress } from '../../redux/users-selects';
+import { getPageSize, getTotalUsersCount, getCurrentPage, getIsFatching, getFollowingInProgress, publishedUsersSelector } from '../../redux/users-selects';
 
 type UsersPropsType = {
-   state: UsersPageType
+   users: UsersType[]
    pageSize: number
    totalUsersCount: number
    currentPage: number
@@ -24,7 +24,7 @@ type UsersPropsType = {
 }
 
 type MSTP = {
-   state: UsersPageType
+   users: UsersType[]
    pageSize: number
    totalUsersCount: number
    currentPage: number
@@ -43,10 +43,11 @@ class UsersContainer extends React.Component<UsersPropsType> {
    }
 
    render() {
+      console.log('render USERS');
 
       return <>
          {this.props.isFatching ? <Spinner /> : null}
-         <Users users={this.props.state}
+         <Users users={this.props.users}
             pageSize={this.props.pageSize}
             totalUsersCount={this.props.totalUsersCount}
             currentPage={this.props.currentPage}
@@ -61,8 +62,10 @@ class UsersContainer extends React.Component<UsersPropsType> {
 }
 
 const mapStateToProps = (state: AppStateType): MSTP => {
+   console.log('mapStateToProps Users');
+
    return {
-      state: getUsers(state),
+      users: publishedUsersSelector(state),
       pageSize: getPageSize(state),
       totalUsersCount: getTotalUsersCount(state),
       currentPage: getCurrentPage(state),

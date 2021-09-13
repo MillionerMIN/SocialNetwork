@@ -8,12 +8,14 @@ import { PostType } from '../../redux/store';
 import c from '../Container.module.scss';
 import s from './Posts.module.scss';
 
+
 type PostsPropsType = {
     posts: Array<PostType>
     isAuth: boolean
 }
 
-function Posts(props: PostsPropsType) {
+export const Posts = React.memo((props: PostsPropsType) =>  {
+    console.log('Render My post');
 
     let postElement = props.posts.map(p => <MyPost key={p.id} id={p.id} avatar={p.avatar} name={p.name} like={p.like} messages={p.messages} />)
     return (
@@ -30,8 +32,4 @@ function Posts(props: PostsPropsType) {
             </div>
         </div>
     );
-}
-
-
-
-export default Posts;
+})

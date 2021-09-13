@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import { PostType } from '../../redux/profile-reducer';
 import { AppStateType } from '../../redux/redux-store';
-import Posts from './Posts';
+import {Posts} from './Posts';
 import { withAuthRedirect } from '../../hoc/WithAuthRedirect';
 import { compose } from 'redux';
 
