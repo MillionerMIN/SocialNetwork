@@ -14,7 +14,7 @@ const intilitionState: AppType = {
 export const appReducer = (state = intilitionState, action: AppActionsTypes): AppType => {
 
    switch (action.type) {
-      case 'INITIALIZED_SUCCSES':
+      case 'APP/INITIALIZED_SUCCSES':
          return {
             ...state,
             initialized: true,
@@ -26,7 +26,7 @@ export const appReducer = (state = intilitionState, action: AppActionsTypes): Ap
    }
 }
 
-export const initializeAppAC = () => ({ type: 'INITIALIZED_SUCCSES' } as const)
+export const initializeAppAC = () => ({ type: 'APP/INITIALIZED_SUCCSES' } as const)
 
 //ThUNK
 export const initializeApp = (): AppThunkType => (dispatch) => {

@@ -1,13 +1,14 @@
 import { Dispatch } from "redux";
 import { usersAPI } from "../api/usersApi";
+import { updateObjectInArray } from "../utils/object-helper";
 
-const FOLLOW = 'FOLLOW';
-const UNFOLLOW = 'UNFOLLOW';
-const SET_USERS = 'SET_USERS';
-const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
-const SET_USERS_TOTAL_COUNT = 'SET_USERS_TOTAL_COUNT';
-const SET_IS_FETCHING = 'SET_IS_FETCHING';
-const SET_IN_FOLLOWING = 'SET_IN_FOLLOWING';
+const FOLLOW = 'USERS/UPDATE_STATUS';
+const UNFOLLOW = 'USERS/UNFOLLOW';
+const SET_USERS = 'USERS/SET_USERS';
+const SET_CURRENT_PAGE = 'USERS/SET_CURRENT_PAGE';
+const SET_USERS_TOTAL_COUNT = 'USERS/SET_USERS_TOTAL_COUNT';
+const SET_IS_FETCHING = 'USERS/SET_IS_FETCHING';
+const SET_IN_FOLLOWING = 'USERS/SET_IN_FOLLOWING';
 
 export type UsersType = {
    id: number
@@ -50,27 +51,17 @@ const intilitionState: UsersPageType = {
    followingInProgress: [],
 }
 
-const usersReducer = (state: UsersPageType = intilitionState, action: ActionsTypes): UsersPageType => {
+export const usersReducer = (state: UsersPageType = intilitionState, action: ActionsTypes): UsersPageType => {
    switch (action.type) {
       case FOLLOW:
          return {
             ...state,
-            users: state.users.map(u => {
-               if (u.id === action.userId) {
-                  return { ...u, followed: true }
-               }
-               return u;
-            })
+            users: updateObjectInArray(state.users, action.userId, 'id', {followed: true})
          }
       case UNFOLLOW:
          return {
             ...state,
-            users: state.users.map(u => {
-               if (u.id === action.userId) {
-                  return { ...u, followed: false }
-               }
-               return u;
-            })
+            users: updateObjectInArray(state.users, action.userId, 'id', { followed: false })
          }
       case SET_USERS:
          return {
@@ -110,37 +101,28 @@ export const setIsFetching = (isFatching: boolean) => ({ type: SET_IS_FETCHING, 
 export const setFollowingInProgress = (isFatching: boolean, userId: number) => ({ type: SET_IN_FOLLOWING, isFatching, userId } as const)
 
 //THUNK
-export const getUsersTC = (page: number, pageSize: number) => (dispatch: Dispatch) => {
+export const getUsersTC = (page: number, pageSize: number) => async (dispatch: Dispatch) => {
    dispatch(setIsFetching(true));
    dispatch(setCurrentPage(page));
-   usersAPI.getUsers(page, pageSize)
-      .then(res => {
-         dispatch(setIsFetching(false))
-         dispatch(setUsers(res.data.items))
-         dispatch(setUsersTotalCount(res.data.totalCount / 140))
-      })
+   const data = await usersAPI.getUsers(page, pageSize)
+   dispatch(setIsFetching(false))
+   dispatch(setUsers(data.data.items))
+   dispatch(setUsersTotalCount(data.data.totalCount / 140))
 }
 
-export const follow = (userId: number) => (dispatch: Dispatch) => {
+const followUnfollowFlow = async(dispatch: Dispatch, userId: number, actionCreators: any, apiMethod: any) => {
    dispatch(setFollowingInProgress(true, userId))
-   usersAPI.postFollow(userId)
-      .then(res => {
-         if (res.data.resultCode === 0) {
-            dispatch(followAC(userId))
-         }
-         dispatch(setFollowingInProgress(false, userId))
-      })
+   const response = await apiMethod(userId)
+   if (response.data.resultCode === 0) {
+      dispatch(actionCreators(userId))
+   }
+   dispatch(setFollowingInProgress(false, userId))
 }
 
-export const unFollow = (userId: number) => (dispatch: Dispatch) => {
-   dispatch(setFollowingInProgress(true, userId))
-   usersAPI.deletFollow(userId)
-      .then(res => {
-         if (res.data.resultCode === 0) {
-            dispatch(unFollowAC(userId))
-         }
-         dispatch(setFollowingInProgress(false, userId))
-      })
+export const follow = (userId: number) => async (dispatch: Dispatch) =>{
+   followUnfollowFlow(dispatch, userId, usersAPI.postFollow.bind(userId), followAC)
 }
 
-export default usersReducer;
+export const unFollow = (userId: number) => async (dispatch: Dispatch) => {
+   followUnfollowFlow(dispatch, userId, usersAPI.deleteFollow.bind(userId), unFollowAC)
+}

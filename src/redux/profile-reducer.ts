@@ -68,10 +68,10 @@ const intilitionState: PostsPageType = {
    status: '---',
 }
 
-const profileReducer = (state = intilitionState, action: AppActionType): PostsPageType => {
+export const profileReducer = (state = intilitionState, action: AppActionType): PostsPageType => {
 
    switch (action.type) {
-      case 'ADD-POST':
+      case 'PROFILE/ADD-POST':
          return {
             ...state,
             posts: [...state.posts,
@@ -83,18 +83,18 @@ const profileReducer = (state = intilitionState, action: AppActionType): PostsPa
                like: 0
             }],
          }
-      case 'REMOVE-POST': 
-         return { ...state, posts: state.posts.filter(p=> p.id !== action.postId) }
-      case 'SET_USERS_PROFILE':
+      case 'PROFILE/REMOVE-POST':
+         return { ...state, posts: state.posts.filter(p => p.id !== action.postId) }
+      case 'PROFILE/SET_USERS_PROFILE':
          return {
             ...state, profile: action.profile
          }
-      case 'SET_STATUS':
+      case 'PROFILE/SET_STATUS':
          return {
             ...state,
             status: action.status
          }
-      case 'UPDATE_STATUS':
+      case 'PROFILE/UPDATE_STATUS':
          return {
             ...state, status: action.status
          }
@@ -104,35 +104,28 @@ const profileReducer = (state = intilitionState, action: AppActionType): PostsPa
    }
 }
 
-export const addPostAC = (newPostText: string) => ({ type: 'ADD-POST', newPostText } as const)
-export const removePostAC = (postId: number) => ({ type: 'REMOVE-POST', postId} as const)
-export const setUsersProfileAC = (profile: ProfileType | null) => ({ type: 'SET_USERS_PROFILE', profile } as const)
-export const setStatusAC = (status: string) => ({ type: 'SET_STATUS', status } as const)
-export const updateStatusAC = (status: string) => ({ type: 'UPDATE_STATUS', status } as const)
+export const addPostAC = (newPostText: string) => ({ type: 'PROFILE/ADD-POST', newPostText } as const)
+export const removePostAC = (postId: number) => ({ type: 'PROFILE/REMOVE-POST', postId } as const)
+export const setUsersProfileAC = (profile: ProfileType | null) => ({ type: 'PROFILE/SET_USERS_PROFILE', profile } as const)
+export const setStatusAC = (status: string) => ({ type: 'PROFILE/SET_STATUS', status } as const)
+export const updateStatusAC = (status: string) => ({ type: 'PROFILE/UPDATE_STATUS', status } as const)
 
 //THUNK
-export const getProfileTC = (userId: number): AppThunkType => (dispatch) => {
-   profileAPI.getProfile(userId)
-      .then(res => {
-         dispatch(setUsersProfileAC(res.data));
-         console.log(res.data);
-      })
+export const getProfileTC = (userId: number): AppThunkType => async (dispatch) => {
+   const response = await profileAPI.getProfile(userId)
+   dispatch(setUsersProfileAC(response.data));
+   console.log(response.data);
 }
 
-export const getStatusTC = (userId: number): AppThunkType => (dispatch) => {
-   profileAPI.getStatus(userId)
-      .then(res => {
-         dispatch(setStatusAC(res.data));
-         console.log(res.data);
-      })
+export const getStatusTC = (userId: number): AppThunkType => async (dispatch) => {
+   const response = await profileAPI.getStatus(userId)
+   dispatch(setStatusAC(response.data));
+   console.log(response.data);
 }
 
-export const updateStatusTC = (status: string): AppThunkType => (dispatch) => {
-   profileAPI.updateStatus(status)
-      .then(res => {
-         if (res.data.resultCode === 0) {
-            dispatch(updateStatusAC(status));
-         };
-      })
+export const updateStatusTC = (status: string): AppThunkType => async (dispatch) => {
+   const response = await profileAPI.updateStatus(status)
+   if (response.data.resultCode === 0) {
+      dispatch(updateStatusAC(status));
+   };
 }
-export default profileReducer;

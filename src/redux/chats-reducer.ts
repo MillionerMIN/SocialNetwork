@@ -1,7 +1,6 @@
 import { AppActionType } from "./redux-store";
 
-
-const SEND_MESSAGE = 'SEND-MESSAGE';
+const SEND_MESSAGE = 'CHAT/SEND-MESSAGE';
 
 export type ChatMessageType = {
    id: number
@@ -38,13 +37,12 @@ const intilitionState: ChatsPageType = {
    ],
 }
 
-const chatsReducer = (state = intilitionState, action: AppActionType): ChatsPageType => {
+export const chatsReducer = (state = intilitionState, action: AppActionType): ChatsPageType => {
    switch (action.type) {
       case SEND_MESSAGE:
          return {
             ...state,
             chats: [...state.chats, { id: 6, message: action.message }],
-
          }
 
       default:
@@ -53,5 +51,3 @@ const chatsReducer = (state = intilitionState, action: AppActionType): ChatsPage
 }
 
 export const sendMessageAC = (message: string) => ({ type: SEND_MESSAGE, message } as const)
-
-export default chatsReducer;

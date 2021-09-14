@@ -1,7 +1,7 @@
 import { applyMiddleware, combineReducers, createStore } from "redux";
-import chatsReducer, { ChatActionsTypes } from "./chats-reducer";
-import profileReducer, { ProfileActionsTypes } from "./profile-reducer";
-import usersReducer from "./users-reducer";
+import {chatsReducer, ChatActionsTypes } from "./chats-reducer";
+import { profileReducer, ProfileActionsTypes } from "./profile-reducer";
+import {usersReducer} from "./users-reducer";
 // import sidebarReducer from "./sidebar-reducer";
 import { authReducer, AuthActionsTypes } from './auth-reducer';
 import thunk, { ThunkAction } from "redux-thunk";

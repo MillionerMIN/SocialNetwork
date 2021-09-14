@@ -21,7 +21,7 @@ const intilitionState: AuthType = {
 export const authReducer = (state = intilitionState, action: AppActionType): AuthType => {
 
    switch (action.type) {
-      case 'SET_USER_DATA':
+      case 'AUTH/SET_USER_DATA':
          return {
             ...state,
             ...action.payload,
@@ -37,39 +37,31 @@ export const setAuthUserDataAC = (
    id: null | number,
    email: null | string,
    login: null | string,
-   isAuth: boolean) => ({ type: 'SET_USER_DATA', payload: { id, email, login, isAuth } } as const)
+   isAuth: boolean) => ({ type: 'AUTH/SET_USER_DATA', payload: { id, email, login, isAuth } } as const)
 
 //ThUNK
-export const getAuthUserDataTC = (): AppThunkType => (dispatch) => {
-   authAPI.me()
-      .then(res => {
-         if (res.data.resultCode === 0) {
-            let { email, id, login } = res.data.data
-            dispatch(setAuthUserDataAC(id, email, login, true))
-         }
-      })
+export const getAuthUserDataTC = (): AppThunkType => async (dispatch) => {
+   const response = await authAPI.me()
+
+   if (response.data.resultCode === 0) {
+      let { email, id, login } = response.data.data
+      dispatch(setAuthUserDataAC(id, email, login, true))
+   }
 }
 
-export const loginTC = (email: string, password: string, rememberMe: boolean): AppThunkType => (dispatch) => {
-   authAPI.login(email, password, rememberMe)
-      .then(res => {
-         if (res.data.resultCode === 0) {
-            dispatch(getAuthUserDataTC());
-         } else {
-            let message = res.data.messages.length > 0 ? res.data.messages[0] : 'some error';
-            //@ts-ignore
-            // export function stopSubmit(form: string, errors?: Object): Action;
-            dispatch(stopSubmit('login', { _error: message}))
-         }
-      })
+export const loginTC = (email: string, password: string, rememberMe: boolean): AppThunkType => async (dispatch) => {
+   const response = await authAPI.login(email, password, rememberMe)
+   if (response.data.resultCode === 0) {
+      dispatch(getAuthUserDataTC());
+   } else {
+      let message = response.data.messages.length > 0 ? response.data.messages[0] : 'some error';
+      dispatch(stopSubmit('login', { _error: message }))
+   }
 }
 
-export const loginoutTC = (): AppThunkType => (dispatch) => {
-   authAPI.loginout()
-      .then(res => {
-         if (res.data.resultCode === 0) {
-            dispatch(setAuthUserDataAC(null, null, null, false));
-         }
-      })
+export const loginoutTC = (): AppThunkType => async (dispatch) => {
+   const response = await authAPI.loginout()
+   if (response.data.resultCode === 0) {
+      dispatch(setAuthUserDataAC(null, null, null, false));
+   }
 }
-

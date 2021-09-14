@@ -1,4 +1,3 @@
-import React from "react";
 import profileReducer, { addPostAC, PostsPageType, removePostAC, updateStatusAC } from './profile-reducer';
 
 const state: PostsPageType = {
@@ -24,15 +23,11 @@ const state: PostsPageType = {
   status: '---',
 }
 
-
 test('length of post should be incremented', () => {
-
   //1.test data
   let action = addPostAC('Hello')
-  
   //2. action
   let newState = profileReducer(state, action);
-
   //3. expected
 expect(newState.posts.length).toBe(4)
 expect(newState.posts[3].messages).toBe('Hello')
@@ -40,31 +35,19 @@ expect(newState.posts[3].messages).toBe('Hello')
 
 
 test('message of new post should be correct', () => {
-
-  //1.test data
   let action = addPostAC('Hello')
-  //2. action
   let newState = profileReducer(state, action);
-  //3. expected
   expect(newState.posts[3].messages).toBe('Hello')
 });
 
 test('after deleting length of messages should be decrement', () => {
-
-  //1.test data
   let action = removePostAC(1)
-  //2. action
   let newState = profileReducer(state, action);
-  //3. expected
   expect(newState.posts.length).toBe(2)
 });
 
 test('set users status should be correct', () => {
-
-  //1.test data
   let action = updateStatusAC('Hi goys')
-  //2. action
   let newState = profileReducer(state, action);
-  //3. expected
   expect(newState.status).toBe('Hi goys')
 });
