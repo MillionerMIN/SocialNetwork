@@ -4,7 +4,7 @@ import { AuthType, loginTC, loginoutTC } from '../../redux/auth-reducer';
 import Account from "./Account/Account";
 import s from './Login.module.scss';
 import c from '../Container.module.scss'
-import { FormError, Input } from "../common/FormControls/FormControls";
+import { FormError, Input, createField } from '../common/FormControls/FormControls';
 import { required } from '../../utils/validation/validation';
 import { connect } from "react-redux";
 import { Redirect } from "react-router";
@@ -23,27 +23,18 @@ type FormDataType = {
 }
 
 const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
+   const { error, handleSubmit } = props
    return (
-      <form onSubmit={props.handleSubmit}>
+      <form onSubmit={handleSubmit}>
+         {createField('email', 'Email', Input, [required])}
+         {createField('password', 'Password', Input, [required], { type: 'password' })}
+         {createField('rememberMe', null, Input, [], { type: 'checkbox' }, 'rememberMe')}
          <div>
-            <Field name="email"
-               placeholder="Login"
-               component={Input}
-               validate={[required]} />
-         </div>
-         <div>
-            <Field name="password"
-               type='password'
-               placeholder="Password"
-               component={Input}
-               validate={[required]} />
+            <label htmlFor='rememberMe'>rememberMe</label>
          </div>
          
-         <div>
-            <Field name="rememberMe" component={Input} type="checkbox" /> remember me
-         </div>
-         {props.error ? <div className={s.error}>
-            <Field name='error' component={FormError} />{props.error}
+         {error ? <div className={s.error}>
+            <Field name='error' component={FormError} />{error}
          </div> : ''}
          <button>LOGIN</button>
       </form>

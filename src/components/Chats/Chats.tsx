@@ -18,12 +18,13 @@ type ChatsPropsType = {
 }
 
 function Chats(props: ChatsPropsType) {
+    const { state, sendMessageAC } = props;
 
-    let dialogElements = props.state.dialog.map(c => <DialogsItem key={c.id} name={c.name} id={c.id} text={c.text} />)
-    let chatMessageElement = props.state.chats.map(m => <ChatMessage key={m.id} id={m.id} message={m.message} />)
+    let dialogElements = state.dialog.map(c => <DialogsItem key={c.id} name={c.name} id={c.id} text={c.text} />)
+    let chatMessageElement = state.chats.map(m => <ChatMessage key={m.id} id={m.id} message={m.message} />)
 
     let addNewMessage = (values: any) => {
-        props.sendMessageAC(values.message)
+        sendMessageAC(values.message)
     }
 
     return (

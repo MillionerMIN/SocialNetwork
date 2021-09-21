@@ -34,17 +34,17 @@ type MSTP = {
 
 class UsersContainer extends React.Component<UsersPropsType> {
    componentDidMount() {
-      this.props.getUsersTC(this.props.currentPage, this.props.pageSize)
+      const { getUsersTC, currentPage, pageSize } = this.props
+      getUsersTC(currentPage, pageSize)
    }
 
-   onPageChanget = (pageNumber: number) => {
-      this.props.getUsersTC(pageNumber, this.props.pageSize)
-      this.props.setCurrentPage(pageNumber)
+   onPageChange = (pageNumber: number) => {
+      const { getUsersTC, setCurrentPage, pageSize } = this.props
+      getUsersTC(pageNumber, pageSize)
+      setCurrentPage(pageNumber)
    }
 
    render() {
-      console.log('render USERS');
-
       return <>
          {this.props.isFatching ? <Spinner /> : null}
          <Users users={this.props.users}
@@ -53,7 +53,7 @@ class UsersContainer extends React.Component<UsersPropsType> {
             currentPage={this.props.currentPage}
             follow={this.props.follow}
             unFollow={this.props.unFollow}
-            onPageChanget={this.onPageChanget}
+            onPageChange={this.onPageChange}
             followingInProgress={this.props.followingInProgress}
             setFollowingInProgress={this.props.setFollowingInProgress}
          />
@@ -62,8 +62,6 @@ class UsersContainer extends React.Component<UsersPropsType> {
 }
 
 const mapStateToProps = (state: AppStateType): MSTP => {
-   console.log('mapStateToProps Users');
-
    return {
       users: publishedUsersSelector(state),
       pageSize: getPageSize(state),

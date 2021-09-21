@@ -14,7 +14,8 @@ type LoginContainerType = {
 class LoginContainer extends React.Component<LoginContainerType & mapStateToPropsType> {
 
    componentDidMount() {
-      this.props.getAuthUserDataTC(this.props.auth.id, this.props.auth.email, this.props.auth.email)
+      const { getAuthUserDataTC, auth } = this.props
+      getAuthUserDataTC(auth.id, auth.email, auth.email)
    }
    render() {
       return <Login {...this.props} />

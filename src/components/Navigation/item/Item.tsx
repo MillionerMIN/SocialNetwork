@@ -19,4 +19,4 @@ function Item({title, link, icon}: ItemPropsType) {
     );
 }
 
-export default Item;
+export default Item; 

@@ -1,5 +1,5 @@
 import { Dispatch } from "redux";
-import { usersAPI } from "../api/usersApi";
+import { usersAPI } from '../api/usersApi';
 import { updateObjectInArray } from "../utils/object-helper";
 
 const FOLLOW = 'USERS/UPDATE_STATUS';
@@ -110,7 +110,7 @@ export const getUsersTC = (page: number, pageSize: number) => async (dispatch: D
    dispatch(setUsersTotalCount(data.data.totalCount / 140))
 }
 
-const followUnfollowFlow = async(dispatch: Dispatch, userId: number, actionCreators: any, apiMethod: any) => {
+const followUnfollowFlow = async (dispatch: Dispatch, userId: number, apiMethod:any, actionCreators: any) => {
    dispatch(setFollowingInProgress(true, userId))
    const response = await apiMethod(userId)
    if (response.data.resultCode === 0) {
