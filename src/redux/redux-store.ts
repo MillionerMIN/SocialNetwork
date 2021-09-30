@@ -1,4 +1,4 @@
-import { applyMiddleware, combineReducers, createStore } from "redux";
+import { applyMiddleware, combineReducers, createStore, compose } from "redux";
 import {chatsReducer, ChatActionsTypes } from "./chats-reducer";
 import { profileReducer, ProfileActionsTypes } from "./profile-reducer";
 import {usersReducer} from "./users-reducer";
@@ -20,6 +20,9 @@ const state = combineReducers({
    // sidebar: sidebarReducer
 });
 
+// const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+// const store = createStore(state, composeEnhancers(applyMiddleware(thunk)));
+
 const store = createStore(state, applyMiddleware(thunk));
 
 export type AppStateType = ReturnType<typeof state>
@@ -38,5 +41,5 @@ declare const window: Window &
    typeof globalThis & {
       store: any
    }
-
-window.store = store;
+//@ts-ignore
+window.__store__ = store;

@@ -1,9 +1,0 @@
-{
-    "version": 3,
-    "mappings": "AAAA,AAAA,QAAQ,AAAC,CACL,UAAU,CAAE,IAAI,CAChB,OAAO,CAAE,MAAM,CAChB,UAAU,CAAE,KAAK,CAChB,SAAS,CAAE,IAAI,CACf,WAAW,CAAE,IAAI,CACpB,AAED,AAAA,QAAQ,CAAC,KAAK,AAAC,CACX,SAAS,CAAE,IAAI,CACf,KAAK,CAAE,OAAO,CACjB",
-    "sources": [
-        "../NewMess/NewMess.module.scss"
-    ],
-    "names": [],
-    "file": "NewMess.module.min.css"
-}

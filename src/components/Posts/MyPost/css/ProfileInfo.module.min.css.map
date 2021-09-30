@@ -1,9 +1,0 @@
-{
-    "version": 3,
-    "mappings": "AAAA,AAAA,YAAY,AAAC,CACT,OAAO,CAAE,SAAS,CAClB,OAAO,CAAE,IAAI,CACb,eAAe,CAAC,UAAU,CAe7B,AAlBD,AAKI,YALQ,CAKR,GAAG,AAAC,CACA,SAAS,CAAE,IAAI,CACf,UAAU,CAAE,IAAI,CAChB,aAAa,CAAE,IAAI,CACtB,AATL,AAWI,YAXQ,CAWR,SAAS,AAAC,CACN,YAAY,CAAE,IAAI,CAClB,UAAU,CAAE,IAAI,CAChB,SAAS,CAAE,IAAI,CACf,WAAW,CAAE,IAAI,CACjB,KAAK,CAAE,OAAO,CACjB",
-    "sources": [
-        "../ProfileInfo/ProfileInfo.module.scss"
-    ],
-    "names": [],
-    "file": "ProfileInfo.module.min.css"
-}

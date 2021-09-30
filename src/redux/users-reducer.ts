@@ -9,6 +9,7 @@ const SET_CURRENT_PAGE = 'USERS/SET_CURRENT_PAGE';
 const SET_USERS_TOTAL_COUNT = 'USERS/SET_USERS_TOTAL_COUNT';
 const SET_IS_FETCHING = 'USERS/SET_IS_FETCHING';
 const SET_IN_FOLLOWING = 'USERS/SET_IN_FOLLOWING';
+const SET_PAGE_SIZE = 'SET_PAGE_SIZE';
 
 export type UsersType = {
    id: number
@@ -40,6 +41,7 @@ export type ActionsTypes = ReturnType<typeof followAC>
    | ReturnType<typeof setUsersTotalCount>
    | ReturnType<typeof setIsFetching>
    | ReturnType<typeof setFollowingInProgress>
+   |ReturnType<typeof setPageSize>
 
 
 const intilitionState: UsersPageType = {
@@ -56,7 +58,7 @@ export const usersReducer = (state: UsersPageType = intilitionState, action: Act
       case FOLLOW:
          return {
             ...state,
-            users: updateObjectInArray(state.users, action.userId, 'id', {followed: true})
+            users: updateObjectInArray(state.users, action.userId, 'id', { followed: true })
          }
       case UNFOLLOW:
          return {
@@ -72,6 +74,8 @@ export const usersReducer = (state: UsersPageType = intilitionState, action: Act
          return {
             ...state, currentPage: action.currentPage
          }
+         case SET_PAGE_SIZE:
+            return {...state, pageSize: action.pageSize}
       case SET_USERS_TOTAL_COUNT:
          return {
             ...state, totalUsersCount: action.totalCount
@@ -96,6 +100,7 @@ export const followAC = (userId: number) => ({ type: FOLLOW, userId } as const)
 export const unFollowAC = (userId: number) => ({ type: UNFOLLOW, userId } as const)
 export const setUsers = (users: Array<UsersType>) => ({ type: SET_USERS, users } as const)
 export const setCurrentPage = (currentPage: number) => ({ type: SET_CURRENT_PAGE, currentPage } as const)
+export const setPageSize = (pageSize: number) => ({ type: SET_PAGE_SIZE, pageSize } as const)
 export const setUsersTotalCount = (totalCount: number) => ({ type: SET_USERS_TOTAL_COUNT, totalCount } as const)
 export const setIsFetching = (isFatching: boolean) => ({ type: SET_IS_FETCHING, isFatching } as const)
 export const setFollowingInProgress = (isFatching: boolean, userId: number) => ({ type: SET_IN_FOLLOWING, isFatching, userId } as const)
@@ -104,13 +109,14 @@ export const setFollowingInProgress = (isFatching: boolean, userId: number) => (
 export const getUsersTC = (page: number, pageSize: number) => async (dispatch: Dispatch) => {
    dispatch(setIsFetching(true));
    dispatch(setCurrentPage(page));
+   dispatch(setPageSize(pageSize))
    const data = await usersAPI.getUsers(page, pageSize)
    dispatch(setIsFetching(false))
    dispatch(setUsers(data.data.items))
-   dispatch(setUsersTotalCount(data.data.totalCount / 140))
+   dispatch(setUsersTotalCount(data.data.totalCount))
 }
 
-const followUnfollowFlow = async (dispatch: Dispatch, userId: number, apiMethod:any, actionCreators: any) => {
+const followUnfollowFlow = async (dispatch: Dispatch, userId: number, apiMethod: any, actionCreators: any) => {
    dispatch(setFollowingInProgress(true, userId))
    const response = await apiMethod(userId)
    if (response.data.resultCode === 0) {
@@ -119,7 +125,7 @@ const followUnfollowFlow = async (dispatch: Dispatch, userId: number, apiMethod:
    dispatch(setFollowingInProgress(false, userId))
 }
 
-export const follow = (userId: number) => async (dispatch: Dispatch) =>{
+export const follow = (userId: number) => async (dispatch: Dispatch) => {
    followUnfollowFlow(dispatch, userId, usersAPI.postFollow.bind(userId), followAC)
 }
 
