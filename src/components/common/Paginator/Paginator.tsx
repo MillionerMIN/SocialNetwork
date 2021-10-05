@@ -45,9 +45,9 @@ export const Paginator = (props: PaginatorType) => {
             (page) =>
               page >= leftPortionPageNumber && page <= rightPortionPageNumber
           )
-          .map((page) => (
+          .map((page, index) => (
             <button
-              key={page}
+              key={index}
               className={currentPage === page ? s.selectedPage : ''}
               onClick={() => onPageChange(page)}
             >
