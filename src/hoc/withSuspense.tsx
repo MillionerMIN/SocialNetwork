@@ -1,4 +1,4 @@
-import { ComponentType, ReactNode, Suspense } from 'react';
+import { ComponentType, Suspense } from 'react';
 
 export function withSuspense<T>(ChildComp: ComponentType<T>) {
   return (props: any) => {
