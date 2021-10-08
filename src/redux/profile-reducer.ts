@@ -10,7 +10,7 @@ export type PostType = {
 }
 
 export type ProfileType = {
-   aboutMe: string
+   aboutMe: string | undefined
    contacts: {
       facebook: string
       website: null | string
@@ -36,6 +36,7 @@ export type PostsPageType = {
    posts: Array<PostType>
    profile: null | ProfileType
    status: string
+   photos: string
 }
 
 export type ProfileActionsTypes = ReturnType<typeof addPostAC>
@@ -43,6 +44,7 @@ export type ProfileActionsTypes = ReturnType<typeof addPostAC>
    | ReturnType<typeof setStatusAC>
    | ReturnType<typeof updateStatusAC>
    | ReturnType<typeof removePostAC>
+   | ReturnType<typeof updatePhotoAC>
 
 
 const intilitionState: PostsPageType = {
@@ -66,6 +68,7 @@ const intilitionState: PostsPageType = {
    ],
    profile: null,
    status: '---',
+   photos: '-',
 }
 
 export const profileReducer = (state = intilitionState, action: AppActionType): PostsPageType => {
@@ -98,6 +101,10 @@ export const profileReducer = (state = intilitionState, action: AppActionType): 
          return {
             ...state, status: action.status
          }
+      case 'PROFILE/UPDATE_PHOTO':
+         return {
+            ...state, photos: action.photos
+         }
       default: {
          return state;
       }
@@ -109,6 +116,7 @@ export const removePostAC = (postId: number) => ({ type: 'PROFILE/REMOVE-POST', 
 export const setUsersProfileAC = (profile: ProfileType | null) => ({ type: 'PROFILE/SET_USERS_PROFILE', profile } as const)
 export const setStatusAC = (status: string) => ({ type: 'PROFILE/SET_STATUS', status } as const)
 export const updateStatusAC = (status: string) => ({ type: 'PROFILE/UPDATE_STATUS', status } as const)
+export const updatePhotoAC = (photos: string) => ({ type: 'PROFILE/UPDATE_PHOTO', photos } as const)
 
 //THUNK
 export const getProfileTC = (userId: number): AppThunkType => async (dispatch) => {
@@ -127,5 +135,12 @@ export const updateStatusTC = (status: string): AppThunkType => async (dispatch)
    const response = await profileAPI.updateStatus(status)
    if (response.data.resultCode === 0) {
       dispatch(updateStatusAC(status));
+   };
+}
+
+export const updatePhotoTC = (photos: string): AppThunkType => async (dispatch) => {
+   const response = await profileAPI.updatePhoto(photos)
+   if (response.data.resultCode === 0) {
+      dispatch(updatePhotoAC(photos))
    };
 }
