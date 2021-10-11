@@ -57,10 +57,15 @@ const ProfileUser = (props: ProfileUserPropsType) => {
       </div>
       <div className={s.title}>{props.profile?.fullName}</div>
       {!editMode && (
-        <span onDoubleClick={activatedEditMod} className={s.descr}>
+        <div>
+            <span onDoubleClick={activatedEditMod} className={s.descr}>
           {status || '---'}
         </span>
+        <ProfileForm profile={profile} status={status}/>
+      
+        </div>
       )}
+        
       {editMode && (
         <input
           onChange={onChangeStatus}
@@ -71,6 +76,24 @@ const ProfileUser = (props: ProfileUserPropsType) => {
         />
       )}
       {isOwner && <input type="file" onChange={onUserPhoto} />}
+    </div>
+  );
+};
+
+
+type ProfileFormType = {
+  profile: ProfileType
+  status: string
+}
+
+const ProfileForm = (props: ProfileFormType) => {
+  const {fullName}=props.profile;
+  const {status} = props;  
+  return (
+    <div>
+      <div>
+        <b>status:</b> {status}
+      </div>
     </div>
   );
 };

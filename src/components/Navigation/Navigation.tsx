@@ -13,7 +13,7 @@ import music from './item/icons/music.svg';
 import setting from './item/icons/setting.svg';
 import users from './item/icons/users.svg';
 import other from './item/icons/other.svg';
-import Account from '../Login/Account/Account';
+import Account from '../common/Login/Account/Account';
 import { AuthType } from '../../redux/auth-reducer';
 import { NavLink } from 'react-router-dom';
 

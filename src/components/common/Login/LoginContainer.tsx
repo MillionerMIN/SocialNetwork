@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Login from './Login';
-import { getAuthUserDataTC, AuthType } from '../../redux/auth-reducer';
-import { AppStateType } from '../../redux/redux-store';
+import { getAuthUserDataTC, AuthType } from '../../../redux/auth-reducer';
+import { AppStateType } from '../../../redux/redux-store';
 
 type LoginContainerType = {
    getAuthUserDataTC: (

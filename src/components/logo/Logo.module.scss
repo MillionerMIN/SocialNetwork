@@ -1,0 +1,39 @@
+.logo {
+  display: grid;
+  height: 345px;
+  grid-template-columns: 1fr 1fr;
+  background: linear-gradient(180deg, #0077B5 0%, #0E6795 100%);
+}
+
+.left {
+  justify-self: center;
+  align-self: center;
+
+  div {
+    width: 100px;
+
+    img {
+      border: 1px;
+      border-radius: 8px;
+      width: 100%;
+      background: #F7F9FB;
+    }
+  }
+}
+
+.right {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  background: #F7F9FB;
+
+  div {
+    width: 144px;
+
+    img {
+      border: 4px solid #0E6795;
+      border-radius: 8px;
+      width: 100%;
+    }
+  }
+}

@@ -3,9 +3,9 @@ import { Route } from 'react-router-dom';
 
 //import components
 
-import { Footer } from '../Footer/Footer';
+import { Footer } from '../footer/Footer';
 
-import NavigationContainer from '../Navigation/NavigationContainer';
+import NavigationContainer from '../navigation/NavigationContainer';
 
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
@@ -14,16 +14,17 @@ import { initializeApp } from '../../redux/app-reducer';
 import { AppStateType } from '../../redux/redux-store';
 import { Spinner } from '../common/Spinner/Spinner';
 import { withSuspense } from '../../hoc/withSuspense';
+import { Routing } from '../routing/Routing';
 
 //lazy import
 
 const ProfileUserContainer = React.lazy(
-  () => import('../Posts/Sidebar/ProfileUser/ProfileUserContainer')
+  () => import('../posts/Sidebar/ProfileUser/ProfileUserContainer')
 );
-const PostsContainer = React.lazy(() => import('../Posts/PostsContainer'));
-const ChatsContainer = React.lazy(() => import('../Chats/ChatsContainer'));
-const LoginContainer = React.lazy(() => import('../Login/LoginContainer'));
-const UsersContainer = React.lazy(() => import('../Users/UsersContainer'));
+const PostsContainer = React.lazy(() => import('../posts/PostsContainer'));
+const ChatsContainer = React.lazy(() => import('../chats/ChatsContainer'));
+const LoginContainer = React.lazy(() => import('../common/Login/LoginContainer'));
+const UsersContainer = React.lazy(() => import('../users/UsersContainer'));
 
 interface AppPropsType extends React.Component {
   initializeApp: () => void;
@@ -44,6 +45,9 @@ class App extends React.Component<AppPropsType & mapStateToPropsType, {}> {
     return (
       <div>
         <NavigationContainer />
+
+        <Routing/>
+        
         <Route
           path={'/profile/:userId?'}
           render={() => {
@@ -56,11 +60,8 @@ class App extends React.Component<AppPropsType & mapStateToPropsType, {}> {
         />
         <Route path={'/posts'} render={withSuspense(PostsContainer)} />
         <Route path={'/chats'} render={withSuspense(ChatsContainer)} />
-        {/* <Route path={'/news'} render={() => <News />} /> */}
         <Route path={'/users'} render={withSuspense(UsersContainer)} />
         <Route path={'/login'} render={withSuspense(LoginContainer)} />
-        {/* <Route path={'/setting'} render={() => <Setting />} />
-            <Route path={'/other'} render={() => <Other />} /> */}
         <Footer />
       </div>
     );

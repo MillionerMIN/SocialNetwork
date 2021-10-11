@@ -1,14 +1,14 @@
 import React from "react";
 import { Field, InjectedFormProps, reduxForm } from "redux-form";
-import { AuthType, loginTC, loginoutTC } from '../../redux/auth-reducer';
+import { AuthType, loginTC, loginoutTC } from '../../../redux/auth-reducer';
 import Account from "./Account/Account";
 import s from './Login.module.scss';
-import c from '../Container.module.scss'
-import { FormError, Input, createField } from '../common/FormControls/FormControls';
-import { required } from '../../utils/validation/validation';
+import c from '../../Container.module.scss'
+import { FormError, Input, createField } from '../FormControls/FormControls';
+import { required } from '../../../utils/validation/validation';
 import { connect } from "react-redux";
 import { Redirect } from "react-router";
-import { AppStateType } from "../../redux/redux-store";
+import { AppStateType } from "../../../redux/redux-store";
 
 type LoginPropsType = {
    isAuth: boolean
