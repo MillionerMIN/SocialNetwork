@@ -18,13 +18,7 @@ import { Routing } from '../routing/Routing';
 
 //lazy import
 
-const ProfileUserContainer = React.lazy(
-  () => import('../posts/Sidebar/ProfileUser/ProfileUserContainer')
-);
-const PostsContainer = React.lazy(() => import('../posts/PostsContainer'));
-const ChatsContainer = React.lazy(() => import('../chats/ChatsContainer'));
-const LoginContainer = React.lazy(() => import('../common/Login/LoginContainer'));
-const UsersContainer = React.lazy(() => import('../users/UsersContainer'));
+
 
 interface AppPropsType extends React.Component {
   initializeApp: () => void;
@@ -45,23 +39,7 @@ class App extends React.Component<AppPropsType & mapStateToPropsType, {}> {
     return (
       <div>
         <NavigationContainer />
-
-        <Routing/>
-        
-        <Route
-          path={'/profile/:userId?'}
-          render={() => {
-            return (
-              <Suspense fallback={<div>...Loading</div>}>
-                <ProfileUserContainer />
-              </Suspense>
-            );
-          }}
-        />
-        <Route path={'/posts'} render={withSuspense(PostsContainer)} />
-        <Route path={'/chats'} render={withSuspense(ChatsContainer)} />
-        <Route path={'/users'} render={withSuspense(UsersContainer)} />
-        <Route path={'/login'} render={withSuspense(LoginContainer)} />
+        <Routing/>     
         <Footer />
       </div>
     );

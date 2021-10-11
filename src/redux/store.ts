@@ -1,5 +1,6 @@
 // import sidebarReducer from "./sidebar-reducer"
-import { ProfileType } from './profile-reducer';
+
+import { ProfileType } from "../api/usersApi"
 
 export type PostType = {
     id: number

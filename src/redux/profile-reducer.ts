@@ -1,4 +1,4 @@
-import { profileAPI } from '../api/usersApi';
+import { profileAPI, ProfileType } from '../api/usersApi';
 import { AppActionType, AppThunkType } from "./redux-store";
 
 export type PostType = {
@@ -7,28 +7,6 @@ export type PostType = {
    avatar: string
    name: string
    like: number
-}
-
-export type ProfileType = {
-   aboutMe: string | undefined
-   contacts: {
-      facebook: string
-      website: null | string
-      vk: string
-      twitter: string
-      instagram: string
-      youtube: null | string
-      github: string
-      mainLink: null | string
-   },
-   lookingForAJob: boolean
-   lookingForAJobDescription: string,
-   fullName: string,
-   userId: number,
-   photos: {
-      small: string,
-      large: string
-   }
 }
 
 export type PostsPageType = {

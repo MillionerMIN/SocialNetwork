@@ -1,12 +1,13 @@
 import React from 'react';
-import { UsersType } from '../../redux/users-reducer';
+
 import s from './Users.module.scss';
 import c from '../Container.module.scss';
 import { Paginator } from '../common/Paginator/Paginator';
 import { User } from '../common/User/User';
+import { UserType } from '../../api/usersApi';
 
 type UsersPropsType = {
-  users: UsersType[];
+  users: UserType[];
   pageSize: number;
   totalUsersCount: number;
   currentPage: number;

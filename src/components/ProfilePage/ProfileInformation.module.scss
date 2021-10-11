@@ -1,0 +1,38 @@
+.pageInfor {
+  display: grid;
+  grid-template-rows: 360px auto;
+  background-color: #FFFFFF;
+
+  .profileWrapper {
+    display: grid;
+    grid-template-rows: 180px auto;
+
+    img {
+      width: 850px;
+      height: 180px;
+      left: calc(50% - 850px/2 - 165px);
+    }
+
+    .profileInfo {
+      position: relative;
+      display: grid;
+      grid-template-columns: 220px auto;
+
+      img {
+        position: absolute;
+        width: 170px;
+        height: 170px;
+        top: -25px;
+        left: calc(50%/2 - 200px);
+        border: 10px solid #FFFFFF;
+        border-radius: 50%;
+      }
+
+      .info {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        justify-content: space-between;
+      }
+    }
+  }
+}

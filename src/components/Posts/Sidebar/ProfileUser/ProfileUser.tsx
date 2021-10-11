@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import s from './ProfileUser.module.scss';
-import profileBg from '../../../../img/profile/ProfileImg.jpg';
-import profilePhoto from '../../../../img/icons/user.png';
-import { ProfileType } from '../../../../redux/profile-reducer';
+import profileBg from '../../../../image/profile/ProfileImg.jpg';
+import profilePhoto from '../../../../image/icons/user.png';
+
 import { Spinner } from '../../../common/Spinner/Spinner';
+import { ProfileType } from '../../../../api/usersApi';
 
 type ProfileUserPropsType = {
   profile: null | ProfileType;

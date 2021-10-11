@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { ProfileUser } from './ProfileUser';
 import {
-  ProfileType,
   getProfileTC,
   getStatusTC,
   updateStatusTC,
@@ -11,6 +10,7 @@ import {
 import { RouteComponentProps, withRouter } from 'react-router';
 import { AppStateType } from '../../../../redux/redux-store';
 import { compose } from 'redux';
+import { ProfileType } from '../../../../api/usersApi';
 
 type ProfileUserPropsType = {};
 
@@ -60,7 +60,6 @@ class ProfileUserContainer extends React.Component<
     }
   }
   render() {
-    console.log('render');
 
     return (
       <ProfileUser

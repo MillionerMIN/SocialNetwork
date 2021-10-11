@@ -1,16 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { AppStateType } from '../../redux/redux-store';
-import { follow, unFollow, setCurrentPage, setFollowingInProgress, getUsersTC, UsersType, setPageSize } from '../../redux/users-reducer';
-import { Users } from './Users';
+import { follow, unFollow, setCurrentPage, setFollowingInProgress, getUsersTC, setPageSize } from '../../redux/users-reducer';
 import { Spinner } from '../common/Spinner/Spinner';
 import { withAuthRedirect } from '../../hoc/WithAuthRedirect';
 import { withRouter } from 'react-router';
 import { compose } from 'redux';
 import { getPageSize, getTotalUsersCount, getCurrentPage, getIsFatching, getFollowingInProgress, publishedUsersSelector } from '../../redux/users-selects';
+import { UserType } from '../../api/usersApi';
+import { Users } from './Users';
 
 type UsersPropsType = {
-  users: UsersType[];
+  users: UserType[];
   pageSize: number;
   totalUsersCount: number;
   currentPage: number;
@@ -25,7 +26,7 @@ type UsersPropsType = {
 }
 
 type MSTP = {
-   users: UsersType[]
+   users: UserType[]
    pageSize: number
    totalUsersCount: number
    currentPage: number

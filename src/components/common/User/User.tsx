@@ -1,11 +1,12 @@
 import React from "react";
 import { NavLink } from 'react-router-dom';
 import s from './User.module.scss';
-import photoUser from '../../../img/icons/user.png';
-import { UsersType } from '../../../redux/users-reducer';
+import photoUser from '../../../image/icons/user.png';
+import { UserType } from "../../../api/usersApi";
+
 
 type UserPropsType = {
-  user: UsersType
+  user: UserType
   followingInProgress: number[]
   follow: (userId: number) => void
   unFollow: (userId: number) => void

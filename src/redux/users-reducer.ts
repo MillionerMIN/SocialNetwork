@@ -1,5 +1,5 @@
 import { Dispatch } from "redux";
-import { usersAPI } from '../api/usersApi';
+import { usersAPI, UserType } from '../api/usersApi';
 import { updateObjectInArray } from "../utils/object-helper";
 
 const FOLLOW = 'USERS/UPDATE_STATUS';
@@ -11,22 +11,8 @@ const SET_IS_FETCHING = 'USERS/SET_IS_FETCHING';
 const SET_IN_FOLLOWING = 'USERS/SET_IN_FOLLOWING';
 const SET_PAGE_SIZE = 'SET_PAGE_SIZE';
 
-export type UsersType = {
-   id: number
-   name: string
-   photos: {
-      small: string
-      large: string
-   }
-   followed: boolean
-   location?: {
-      country: string
-      city: string
-   }
-}
-
 export type UsersPageType = {
-   users: Array<UsersType>
+   users: Array<UserType>
    pageSize: number
    totalUsersCount: number
    currentPage: number
@@ -98,7 +84,7 @@ export const usersReducer = (state: UsersPageType = intilitionState, action: Act
 
 export const followAC = (userId: number) => ({ type: FOLLOW, userId } as const)
 export const unFollowAC = (userId: number) => ({ type: UNFOLLOW, userId } as const)
-export const setUsers = (users: Array<UsersType>) => ({ type: SET_USERS, users } as const)
+export const setUsers = (users: UserType[]) => ({ type: SET_USERS, users } as const)
 export const setCurrentPage = (currentPage: number) => ({ type: SET_CURRENT_PAGE, currentPage } as const)
 export const setPageSize = (pageSize: number) => ({ type: SET_PAGE_SIZE, pageSize } as const)
 export const setUsersTotalCount = (totalCount: number) => ({ type: SET_USERS_TOTAL_COUNT, totalCount } as const)
